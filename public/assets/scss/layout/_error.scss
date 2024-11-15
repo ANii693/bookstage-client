@@ -1,0 +1,32 @@
+
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  18. Error css start
+/*----------------------------------------*/
+
+// Error style css
+.bd-error {
+    &__number {
+        h2 {
+            font-size: 160px;
+            line-height: 1;
+            @media #{$xs,$sm}{
+                font-size: 120px;
+            }
+        }
+    }
+    &__text {
+        h3 {
+            font-size: 32px;
+            font-weight: var(--bd-fw-sbold);
+            margin-bottom: 10px;
+            @media #{$xs,$sm}{
+                font-size: 28px;
+            }
+        }
+        p {
+            margin-bottom: 45px;
+        }
+    }
+}

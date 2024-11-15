@@ -1,0 +1,256 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  33. Team css start
+/*----------------------------------------*/
+
+// Team style css
+.bd-team {
+	&__wrapper {
+		@include transition(.3s);
+		&:hover {
+			.bd-team__thumb {
+	
+				img {
+					transform: scale3d(1.1, 1.1, 1.1);
+				}
+			}
+		}
+	}
+	&__thumb {
+		margin-bottom: 25px;
+		overflow: hidden;
+	}
+	&__content {
+		h4 {
+			font-size: 22px;
+			margin-bottom: 5px;
+		}
+		a {
+			&:hover {
+				color: var(--clr-theme-1);
+			}
+		}
+	}
+	&__share {
+		@include flexbox();
+		flex-direction: row-reverse;
+		position: relative;
+		& > a {
+			display: inline-block;
+			height: 50px;
+			width: 50px;
+			background: var(--clr-theme-1);
+			line-height: 40px;
+			text-align: center;
+		}
+		a {
+			color: var(--clr-common-white);
+			padding: 5px 5px;
+		}
+		&:hover {
+			.bd-team__action {
+				opacity: 1;
+				visibility: visible;
+				@include transition(.3s);
+				right: 50px;
+			}
+		}
+	}
+	&__action {
+		@include flexbox();
+		align-items: center;
+		background: var(--clr-theme-1);
+		gap: 15px;
+		padding: 7px 20px;
+		position: relative;
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		right: 0px;
+		a {
+			&:hover {
+				color: var(--clr-common-heading);
+			}
+		}
+		&::before {
+			position: absolute;
+			content: "";
+			height: 25px;
+			width: 1px;
+			background: var(--clr-border-11);
+			right: 0;
+		}
+	}
+	&__member {
+		&-info {
+			h3 {
+				font-size: 51px;
+				margin-bottom: 20px;
+			}
+			>span {
+				font-size: 18px;
+				display: block;
+			}
+			padding-left: 40px;
+			@media #{$xs,$sm,$md}{
+				padding-left: 0px;
+			}
+		}
+	}
+	&__member {
+		&-details {
+			@include flexbox();
+			flex-direction: column;
+			gap: 25px;
+		}
+	}
+}
+.bd-content {
+	&__inner {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+}
+.info-meta-single {
+	@include flexbox();
+	gap: 20px;
+}
+.info-meta-icon {
+	width: 50px;
+	height: 50px;
+	border: 1px solid var(--clr-border-2);
+	@include border-radius(5px);
+	text-align: center;
+	line-height: 48px;
+}
+.info-meta-text {
+	.meta-heading {
+		display: block;
+	}
+	.meta-link {
+		display: block;
+		font-size: 20px;
+		color: var(--clr-common-heading);
+		font-weight: var(--bd-fw-sbold);
+		&:hover {
+			color: var(--clr-theme-1);
+		}
+	}
+}
+// Progress
+.bd-skill {
+	&__title {
+		&-wrapper {
+			margin-bottom: 13px;
+			@include flexbox();
+			justify-content: space-between;
+			align-items: center;
+			position: relative;
+		}
+	}
+	&__progress {
+		.progress {
+			.progress-bar {
+				background: var(--clr-theme-1);
+				position: relative;
+				overflow: visible;
+				border-radius: 5px !important;
+			}
+		}
+	}
+	&__style {
+		&-inner {
+			.bd-skill {
+				&__title-wrapper {
+					h3 {
+						font-size: 18px;
+						font-weight: var(--bd-fw-medium);
+					}
+				}
+			}
+			.progress-count {
+				color: var(--clr-theme-1);
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+			.bd-skill {
+				&__progress {
+					.progress {
+						height: 10px;
+						background-color: transparent;
+						overflow: visible;
+						position: relative;
+						z-index: 1;
+						&::after {
+							position: absolute;
+							content: "";
+							height: 2px;
+							width: 100%;
+							background: var(--clr-border-8);
+							z-index: -1;
+							top: 50%;
+							transform: translateY(-50%);
+							border-radius: 1px;
+						}
+					}
+				}
+			}
+		}
+	}
+	&__img {
+		&-inner {
+			padding-left: 80px;
+			@media #{$xl} {
+				padding-left: 50px;
+			}
+			@media #{$lg} {
+				padding-left: 30px;
+			}
+			@media #{$xs,$sm,$md} {
+				padding-left: 0px;
+			}
+		}
+	}
+}
+// Archivement-style
+.archivement {
+	&__paragraph {
+		font-size: 18px;
+	}
+}
+.bd-archivement {
+	&-box {
+		padding-left: 50px;
+		@media #{$lg} {
+			padding-left: 30px;
+		}
+		@media #{$xs,$sm,$md,$lg} {
+			padding-left: 0px;
+		}
+	}
+	&__img-item {
+		@include flexbox();
+		align-items: center;
+		gap: 20px;
+		@media #{$lg,$xs} {
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+	}
+	&__title {
+		h3 {
+			font-size: 26px;
+			margin-bottom: 20px;
+		}
+		p {
+			margin-bottom: 33px;
+			font-size: 18px;
+		}
+	}
+}
+.hr-1 {
+	border-bottom: 1px solid #e8e8e8;
+}

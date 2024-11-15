@@ -1,0 +1,111 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  02. Animation css start 
+/*----------------------------------------*/
+
+// Animation style
+@-webkit-keyframes pulse {
+	0% {
+	  -webkit-box-shadow: 0 0 0 0 rgba(255,255,255, 0.4);
+	}
+	70% {
+		-webkit-box-shadow: 0 0 0 45px rgba(255,255,255, 0);
+	}
+	100% {
+		-webkit-box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+	}
+}
+@keyframes pulse {
+0% {
+	-moz-box-shadow: 0 0 0 0 rgba(255,255,255, 0.4);
+	box-shadow: 0 0 0 0 rgba(255,255,255, 0.4);
+}
+70% {
+	-moz-box-shadow: 0 0 0 45px rgba(255,255,255, 0);
+	box-shadow: 0 0 0 45px rgba(255,255,255, 0);
+}
+100% {
+	-moz-box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+	box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+	}
+}
+
+/* ========= circle  effect  ========== */
+
+@keyframes hero-thumb-animation {
+	0% {
+	  transform: translateY(-20px);
+	}
+	100% {
+	  transform: translateY(0px);
+	}
+  }
+@keyframes blinker {
+	0% {
+	 opacity: 1.0;
+	}
+	50% {
+	 opacity: 0.0;
+	}
+	100% {
+	 opacity: 1.0;
+	 color: var(--clr-common-white);
+	}
+}
+
+/* ========= sideleft effect ========== */
+
+@keyframes sideleft {
+  0% {
+    transform: translatex(5px);
+  }
+  100% {
+    transform: translatex(-5px);
+  }
+}
+
+.blink {
+	animation: blinker 2s linear infinite;
+	-webkit-animation: blinker 2s linear infinite;
+	-moz-animation: blinker 2s linear infinite;
+}
+
+/* ========= video-ripple ========== */
+
+@keyframes video-ripple {
+	0%, 35% {
+	  -webkit-transform: scale(0);
+	  transform: scale(0);
+	  opacity: 1;
+	}
+	50% {
+	  -webkit-transform: scale(1.3);
+	  transform: scale(1.3);
+	  opacity: 0.8;
+	}
+	100% {
+	  opacity: 0;
+	  -webkit-transform: scale(1.5);
+	  transform: scale(1.5);
+	}
+  }
+  
+  @-webkit-keyframes video-ripple {
+	0%, 35% {
+	  -webkit-transform: scale(0);
+	  transform: scale(0);
+	  opacity: 1;
+	}
+	50% {
+	  -webkit-transform: scale(1.3);
+	  transform: scale(1.3);
+	  opacity: 0.8;
+	}
+	100% {
+	  opacity: 0;
+	  -webkit-transform: scale(1.5);
+	  transform: scale(1.5);
+	}
+  }
+  

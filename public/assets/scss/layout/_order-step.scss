@@ -1,0 +1,172 @@
+.list-steps {
+    display: flex;
+    width: 100%;
+    margin: 30px 0px;
+    min-width: 768px;
+    .item-step {
+        &.line-active {
+            &::before {
+                background-color: #425A8B;
+            }
+        }
+        width: 50%;
+        position: relative;
+        &::before {
+            height: 10px;
+            content: "";
+            width: 100%;
+            z-index: 1;
+            position: absolute;
+            left: 1px;
+            top: 33px;
+            margin-top: -5px;
+            background-color: #ddd;
+        }
+        &:last-child {
+            &::before {
+                display: none;
+            }
+        }
+        .rounded-step {
+            position: relative;
+            z-index: 2;
+            .icon-step {
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                background-color: #ddd;
+                margin-bottom: 20px;
+                &.step-1 {
+                    background-image: url(../../img/shiping/Order-Placed.svg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    &.active {
+                        background-image: url(../../img/shiping/Order-Placed.svg);
+                        background-color:#5BC694;
+                        color: #ddd;
+                    }
+                }
+                &.step-2 {
+                    background-image: url(../../img/shiping/Production.svg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    &.active {
+                        background-image: url(../../img/shiping/Production.svg);
+                        background-color:#5BC694;
+                    }
+                }
+                &.step-3 {
+                    background-image: url(../../img/shiping/Shipping.svg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    &.active {
+                        background-image: url(../../img/shiping/Shipping.svg);
+                        background-color:#5BC694;
+                        color: #ddd;
+                    }
+                }
+                &.step-4 {
+                    background-image: url(../../img/shiping/Delivered.svg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    &.active {
+                        background-image: url(../../img/shiping/Delivered.svg);
+                        background-color:#5BC694;
+                        color: #ddd;
+                    }
+                }
+              
+            }
+        }
+    }
+}
+
+
+
+// order tracking form 
+
+
+.form-tracking .form-control {
+    height: 54px;
+}
+.form-control {
+    border: 1px solid #DDE4F0 !important;
+}
+
+.form-control {
+    display: block;
+    max-width: 400px;
+    width: 400px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.form-tracking .box-button {
+    width: 10%;
+    min-width: 185px;
+    max-width: 185px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+
+.btn.btn-buy:hover {
+    border: 1px solid #699C47;
+    background-color: #ffffff;
+    color: #425A8B;
+}
+
+.btn.btn-buy {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    border: 1px solid #8C9EC5;
+    width: 100%;
+    text-align: center;
+    padding: 7px 22px;
+    background-color: #699C47;
+}
+
+.form-tracking .btn-buy {
+    height: 54px;
+    line-height: 34px;
+}
+
+.form-tracking .box-input {
+    width: 100%;
+    margin-right: 15px;
+}
+.tracking-search-wrapper{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.dynamic-margin{
+    margin-bottom: 350px;
+}
+
+@media (max-width: 620px) {
+    .tracking-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 430px) {
+    .tracking-wrapper .form-control {
+        max-width: 300px;
+    }
+}

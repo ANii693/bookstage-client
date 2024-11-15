@@ -1,0 +1,102 @@
+@use '../utils' as *;
+
+
+/*----------------------------------------*/
+/*  14. Category css start 
+/*----------------------------------------*/
+
+// Category style
+.bd-category {
+	&__item {
+		position: relative;
+	}
+	&__thumb {
+		img {
+		  @include border-radius(10px)
+		}
+	  }
+	&__content {
+		position: absolute;
+		top: 35px;
+		left: 30px;
+		right: 30px;
+		ul {
+			li {
+				list-style: none;
+				margin-bottom: 5px;
+				position: relative;
+				padding-left: 10px;
+				a {
+					&:hover {
+						color: var(--clr-theme-1);
+					}
+				}
+				&:hover {
+					&:after {
+						background: var(--clr-theme-1);
+					}
+				}
+				&:last-child {
+					margin-bottom: 0;
+				}
+				&:after {
+					position: absolute;
+					content: "";
+					width: 5px;
+					height: 5px;
+					background: var(--clr-common-body-text);
+					left: 0;
+					top: 50%;
+					transform: translateY(-50%);
+					border-radius: 50%;
+				}
+			}
+		}
+		&-title {
+			h4 {
+				font-size: 22px;
+				margin-bottom: 25px;
+			}
+			ul {
+				li {
+					list-style: none;
+				}
+			}
+		}
+	}
+	&__title {
+		display: block;
+		font-weight: var(--bd-fw-medium);
+		color: var(--clr-common-heading);
+		font-size: 16px;
+		margin-bottom: 10px;
+		line-height: 1.3;
+		&:hover {
+			color: var(--clr-theme-1);
+		}
+	}
+	&__img {
+		margin-bottom: 15px;
+	}
+	&__number {
+		font-size: 14px;
+	}
+	
+}
+.bd-singel {
+	&__category {
+		padding: 25px 25px 20px 25px;
+		background: var(--clr-bg-grey);
+		@include border-radius(5px);
+		&:hover {
+			.bd-category {
+				&__img {
+					img {
+						-webkit-transform: scale3d(1.07, 1.07, 1.07) translateZ(0);
+						transform: scale3d(1.07, 1.07, 1.07) translateZ(0);
+					}
+				}
+			}
+		}
+	}
+}

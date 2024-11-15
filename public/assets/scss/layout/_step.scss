@@ -1,0 +1,79 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  31. Step css start
+/*----------------------------------------*/
+
+// Step style
+.bd-step {
+	&__title {
+		font-size: 45px;
+		position: absolute;
+		top: 53%;
+		left: 40%;
+		transform: translate(0%);
+		z-index: 11;
+		color: var(--clr-common-heading);
+		font-weight: var(--bd-fw-light);
+		@media #{$md,$sm}{
+			font-size: 32px;
+		}
+		@media #{$xs}{
+			font-size: 22px;
+		}
+	}
+	&__icon {
+		transform: translate3d(0, 0, 0);
+		-webkit-transition: transform 0.3s cubic-bezier(0.21, 0.6, 0.44, 2.18);
+		-moz-transition: transform 0.3s cubic-bezier(0.21, 0.6, 0.44, 2.18);
+		-ms-transition: transform 0.3s cubic-bezier(0.21, 0.6, 0.44, 2.18);
+		-o-transition: transform 0.3s cubic-bezier(0.21, 0.6, 0.44, 2.18);
+		transition: transform 0.3s cubic-bezier(0.21, 0.6, 0.44, 2.18);
+		img {
+			margin-bottom: 25px;
+		}
+	}
+	&__content {
+		p {
+			color: var(--clr-common-heading);
+			@media #{$md}{
+				padding: 0 20px;
+			}
+		}
+		h3 {
+			margin-bottom: 25px;
+			a {
+				&:hover {
+					color: var(--clr-theme-1);
+				}
+			}
+		}
+	}
+	&__item {
+		padding: 0 27px;
+		@media #{$xs,$sm,$md,$xl,$lg}{
+			padding: 0 0px;
+		}
+		&:hover {
+			.bd-step__icon {
+				transform: translateY(-10px) translate3d(0, -5px, 0);
+			}
+		}
+	}
+	&__arrow {
+		position: absolute;
+		top: 40px;
+		right: -75px;
+		position: absolute;
+		top: 40px;
+		left: 94%;
+		transform: translateX(-50%);
+		@media #{$xl}{
+			right: -35%;
+		}
+		@media #{$xs,$sm,$md,$lg,$md}{
+			display: none;
+		}
+	}
+}
+

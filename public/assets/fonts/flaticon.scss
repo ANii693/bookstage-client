@@ -1,0 +1,133 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?9b0a8652cefa245f1ebfde5ed8c794cb") format("truetype"),
+url("./flaticon.woff?9b0a8652cefa245f1ebfde5ed8c794cb") format("woff"),
+url("./flaticon.woff2?9b0a8652cefa245f1ebfde5ed8c794cb") format("woff2"),
+url("./flaticon.eot?9b0a8652cefa245f1ebfde5ed8c794cb#iefix") format("embedded-opentype"),
+url("./flaticon.svg?9b0a8652cefa245f1ebfde5ed8c794cb#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "magnifiying-glass": "\f101",
+    "quote": "\f102",
+    "plant": "\f103",
+    "planting": "\f104",
+    "delivery-truck": "\f105",
+    "return": "\f106",
+    "shield": "\f107",
+    "email": "\f108",
+    "options": "\f109",
+    "testing": "\f10a",
+    "delivery": "\f10b",
+    "marketing": "\f10c",
+    "consumer": "\f10d",
+    "healthy-food": "\f10e",
+    "harvest": "\f10f",
+    "ice-cream": "\f110",
+    "basket": "\f111",
+    "garlic": "\f112",
+    "cauliflower": "\f113",
+    "planting-1": "\f114",
+    "olive-oil": "\f115",
+    "planet-earth": "\f116",
+    "fast-delivery": "\f117",
+    "products": "\f118",
+    "shield-1": "\f119",
+    "fast-delivery-1": "\f11a",
+    "share": "\f11b",
+);
+
+.flaticon-magnifiying-glass:before {
+    content: map-get($flaticon-map, "magnifiying-glass");
+}
+.flaticon-quote:before {
+    content: map-get($flaticon-map, "quote");
+}
+.flaticon-plant:before {
+    content: map-get($flaticon-map, "plant");
+}
+.flaticon-planting:before {
+    content: map-get($flaticon-map, "planting");
+}
+.flaticon-delivery-truck:before {
+    content: map-get($flaticon-map, "delivery-truck");
+}
+.flaticon-return:before {
+    content: map-get($flaticon-map, "return");
+}
+.flaticon-shield:before {
+    content: map-get($flaticon-map, "shield");
+}
+.flaticon-email:before {
+    content: map-get($flaticon-map, "email");
+}
+.flaticon-options:before {
+    content: map-get($flaticon-map, "options");
+}
+.flaticon-testing:before {
+    content: map-get($flaticon-map, "testing");
+}
+.flaticon-delivery:before {
+    content: map-get($flaticon-map, "delivery");
+}
+.flaticon-marketing:before {
+    content: map-get($flaticon-map, "marketing");
+}
+.flaticon-consumer:before {
+    content: map-get($flaticon-map, "consumer");
+}
+.flaticon-healthy-food:before {
+    content: map-get($flaticon-map, "healthy-food");
+}
+.flaticon-harvest:before {
+    content: map-get($flaticon-map, "harvest");
+}
+.flaticon-ice-cream:before {
+    content: map-get($flaticon-map, "ice-cream");
+}
+.flaticon-basket:before {
+    content: map-get($flaticon-map, "basket");
+}
+.flaticon-garlic:before {
+    content: map-get($flaticon-map, "garlic");
+}
+.flaticon-cauliflower:before {
+    content: map-get($flaticon-map, "cauliflower");
+}
+.flaticon-planting-1:before {
+    content: map-get($flaticon-map, "planting-1");
+}
+.flaticon-olive-oil:before {
+    content: map-get($flaticon-map, "olive-oil");
+}
+.flaticon-planet-earth:before {
+    content: map-get($flaticon-map, "planet-earth");
+}
+.flaticon-fast-delivery:before {
+    content: map-get($flaticon-map, "fast-delivery");
+}
+.flaticon-products:before {
+    content: map-get($flaticon-map, "products");
+}
+.flaticon-shield-1:before {
+    content: map-get($flaticon-map, "shield-1");
+}
+.flaticon-fast-delivery-1:before {
+    content: map-get($flaticon-map, "fast-delivery-1");
+}
+.flaticon-share:before {
+    content: map-get($flaticon-map, "share");
+}

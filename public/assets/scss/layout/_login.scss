@@ -1,0 +1,117 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  23. Login css start
+/*----------------------------------------*/
+
+// Register style
+.signup-action-check {
+	@include flexbox();
+	align-items: center;
+	gap: 10px;
+}
+.signup-action {
+	margin-bottom: 25px;
+}
+.bd-acount {
+	&__login {
+		&-text {
+			span {
+				a {
+					color: var(--clr-common-heading);
+					font-weight: var(--bd-fw-sbold);
+					text-decoration: underline;
+					color: var(--clr-common-heading);
+					font-weight: 600;
+					text-decoration: underline;
+				}
+			}
+			margin-bottom: 30px;
+			margin-bottom: 30px;
+		}
+	}
+}
+.bd-sign {
+	&__social {
+		&-text {
+			position: relative;
+			z-index: 5;
+			background: var(--clr-common-white);
+			margin-bottom: 25px;
+			&:before {
+				position: absolute;
+				height: 1px;
+				background: var(--clr-border-8);
+				content: "";
+				width: 100%;
+				top: 15px;
+				left: 0;
+				z-index: -1;
+			}
+			span {
+				background: var(--clr-common-white);
+				display: inline-block;
+				padding: 0 15px;
+			}
+		}
+		&-icon {
+			a {
+				border: 1px solid var(--clr-border-8);
+				padding: 10px 20px;
+				@include border-radius(4px);
+				margin-right: 20px;
+				display: inline-block;
+				color: var(--clr-common-heading);
+				&:hover {
+					color: var(--clr-theme-1);
+					border: 1px solid var(--clr-theme-1);
+				}
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+}
+.sign-check {
+	span {
+		a {
+			text-decoration: underline;
+			font-weight: var(--bd-fw-sbold);
+			color: var(--clr-common-heading);
+		}
+	}
+}
+.bd-registered__wrapper {
+	@include flexbox();
+	justify-content: space-around;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
+}
+.not-register {
+	span {
+		a {
+			color: var(--clr-common-heading);
+			font-weight: var(--bd-fw-sbold);
+			text-decoration: underline;
+		}
+	}
+}
+.forget-password {
+	a {
+		&:hover {
+			color: var(--clr-theme-1);
+		}
+	}
+}
+
+.bd-postbox__singel-input {
+	position: relative;
+	.email-error-message {
+		position: absolute;
+		bottom: 0;
+		left: 0px;
+		font-size: 12px;
+		color: #e23;
+	}
+}

@@ -1,0 +1,241 @@
+
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  10. About css start 
+/*----------------------------------------*/
+
+// About style
+.bd-about {
+	&__content {
+		&-wrapper {
+			padding-right: 25px;
+			@media #{$xl,$lg}{
+				padding-right: 0;
+			}
+		}
+		&-box {
+			margin-top: 100px;
+			@media #{$xl}{
+				padding-left: 30px
+			}
+			@media #{$lg}{
+				padding-left: 30px;
+			}
+			@media #{$xs,$sm,$md,$lg}{
+				margin-top:0;
+			}
+		}
+	}
+	&__bg {
+		&-shape {
+			position: absolute;
+			right: 20%;
+			top: 85px;
+			z-index: -1;
+			-webkit-animation: hero-thumb-animation 2s linear infinite alternate;
+			-moz-animation: hero-thumb-animation 2s linear infinite alternate;
+			-o-animation: hero-thumb-animation 2s linear infinite alternate;
+			animation: hero-thumb-animation 2s linear infinite alternate;
+		}
+	}
+	&__features {
+		@include flexbox();
+		align-items: flex-start;
+		gap: 40px;
+		margin-bottom: 45px;
+		@media #{$xs}{
+			flex-direction: column;
+			gap: 25px;
+		}
+	}
+	&__text {
+		p {
+			margin-bottom: 0;
+		}
+		h4 {
+			margin-bottom: 10px;
+		}
+	}
+	&__thumb {
+		&-wrapper {
+			min-height: 625px;
+		}
+		&-1 {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+		}
+		&-2 {
+			position: absolute;
+			right: 0;
+			top: 75px;
+		}
+	}
+	&__quite{
+		&-box {
+			background: var(--clr-theme-1);
+			position: absolute;
+			max-width: 330px;
+			border-radius: 20px 0px;
+			top: 0;
+			left: 0;
+			z-index: 5;
+			padding-top: 30px;
+			padding-bottom: 60px;
+			padding-left: 55px;
+			padding-right: 20px;
+			.quite {
+				&-icon {
+					i {
+						position: absolute;
+						top: 10px;
+						width: 50px;
+						height: 50px;
+						font-size: 78px;
+						color: #5B8D3A;
+						left: 55px;
+						z-index: -1;
+						transform: rotateY(180deg);
+					}
+				}
+			}
+		}
+		&-name {
+			position: absolute;
+			right: 30px;
+			bottom: 40px;
+			span {
+				font-size: 15px;
+				color: var(--clr-common-white);
+			}
+			&::after {
+				position: absolute;
+				content: "";
+				height: 1px;
+				width: 60px;
+				background: var(--clr-common-white);
+				top: 50%;
+				left: -70px;
+			}
+		}
+	}
+	&__shape {
+		&-1 {
+			position: absolute;
+			z-index: 5;
+			top: 53%;
+			left: 50%;
+			transform: translate(-50%);
+		}
+		&-2 {
+			position: absolute;
+			bottom: 60px;
+			height: 20px;
+			width: 20px;
+			background: var(--clr-text-1);
+			right: 35%;
+			@media #{$lg}{
+				right: 0;
+			}
+			@media #{$xs}{
+				display: none;
+			}
+		}
+		&-3 {
+			position: absolute;
+			bottom: 0;
+			height: 42px;
+			width: 42px;
+			background: var(--clr-text-1);
+			right: 25%;
+			@media #{$lg}{
+				right: 0;
+			}
+			@media #{$xs}{
+				display: none;
+			}
+		}
+		&-4 {
+			position: absolute;
+			bottom: 70px;
+			height: 80px;
+			width: 80px;
+			background: var(--clr-text-2);
+			right: 11%;
+			@media #{$xs}{
+				display: none;
+			}
+		}
+	}
+	&__wrapper {
+		&-2 {
+			min-height: 550px;
+		}
+	}
+	&__image {
+		&-2 {
+			text-align: right;
+			margin-right: 30px;
+			@media #{$xs,$sm,$md}{
+				text-align: left;
+				margin-right: 0;
+			}
+		}
+	}
+	&__inner {
+		@include flexbox();
+		align-items: center;
+		gap: 90px;
+		padding-left: 30px;
+		@media #{$xl,$xs}{
+			padding-left: 0;
+			gap: 30px;
+		}
+		@media #{$lg}{
+			padding-left: 0;
+			gap: 30px;
+			align-items: flex-start;
+			flex-wrap: wrap;
+	
+		}
+		@media #{$lg,$sm}{
+			padding-left: 0;
+			gap: 30px;
+			align-items: flex-start;
+		}
+		@media #{$sm,$md}{
+			padding-left: 0;
+		}
+		@media #{$xs}{
+			flex-wrap: wrap;
+		}
+	}
+	&__info {
+		p {
+			margin-bottom: 55px;
+			@media #{$md,$sm}{
+				margin-bottom: 20px;
+			}
+		}
+	}
+	&__author {
+		@include flexbox();
+		gap: 30px;
+	}
+}
+.quite {
+	&-content {
+		p {
+			color: var(--clr-common-white);
+			font-size: 24px;
+			font-style: italic;
+			border-radius: 20px 0px;
+			line-height: 32px;
+			margin-bottom: 18px;
+		}
+	
+	}
+}
+
+

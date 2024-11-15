@@ -1,0 +1,443 @@
+@use "../utils" as *;
+
+
+
+
+.student-profile-author {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    border-bottom: 1px solid var(--clr-border-17);
+
+    &-img {
+        img { 
+            width: 200px !important;
+            height: 200px !important;
+            object-fit: cover;
+            border-radius: 50%;
+            @media #{$xxs,$xs,$sm} {
+			width: 80px !important;
+            height: 80px !important;
+            object-fit: cover;
+            border-radius: 50%;
+			}
+        }
+    }
+
+    &-text {
+        span {
+            font-size: 20px;
+            margin-bottom: 5px;
+            display: block;
+        }
+    }
+}
+
+.student-profile-author-name {
+    font-size: 28px;
+    margin-bottom: 0px;
+}
+
+.student-profile-sidebar {
+    background-color: var(--clr-bg-grey);
+    padding: 30px;
+    min-height: 100%;
+
+    .nav {
+        flex-direction: column;
+        border-bottom: 0px;
+
+        li {
+            button {
+                display: block;
+                width: 100%;
+                text-align: left;
+                color: var(--clr-text-8);
+                border: none;
+                outline: none;
+                padding: 12px 15px;
+                border-radius: 5px;
+
+                i {
+                    min-width: 22px;
+                }
+
+                &.active {
+                    color: var(--clr-theme-1);
+
+                    & i {
+                        color: var(--clr-theme-1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.student-profile-content {
+    padding: 25px 0px 30px 14px;
+    @media #{$xs} {
+        padding-left: 0px;
+    }
+
+    & h4 {
+        font-size: 20px;
+    }
+}
+
+.student-profile-info {
+    li {
+        display: flex;
+        margin-bottom: 15px;
+
+        h5 {
+            font-size: 16px;
+            margin-bottom: 0px;
+            font-weight: 600;
+            min-width: 230px;
+
+            @media #{$xs} {
+                min-width: 100px;
+            }
+        }
+
+        span {
+            font-size: 16px;
+            color: var(--clr-text-8);
+        }
+    }
+}
+
+.inprogress-course {
+    display: flex;
+    gap: 30px;
+    border: 1px solid var(--clr-border-17);
+    border-radius: 10px;
+    overflow: hidden;
+
+    @media #{$xs} {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    &-img {
+        width: 300px;
+
+        @media #{$xs} {
+            width: 100%;
+        }
+
+        img {
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.inprogress-course-rating {
+    margin-bottom: 10px;
+
+    a {
+        font-size: 15px;
+        color: var(--clr-theme-2);
+        display: inline-block;
+        margin-right: 3px;
+    }
+
+    span {
+        font-size: 16px;
+        color: var(--clr-text-8);
+        margin-left: 3px;
+    }
+}
+
+.inprogress-course-text {
+    padding: 20px 20px 20px 0px;
+
+    @media #{$xs} {
+        padding-left: 20px;
+    }
+}
+
+.inprogress-course-lesson {
+    span {
+        color: var(--clr-text-8);
+        font-size: 16px;
+    }
+
+    h6 {
+        font-size: 16px;
+        font-weight: 600;
+        display: inline-block;
+        padding-left: 10px;
+
+        span {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--clr-common-heading);
+        }
+    }
+}
+
+.inprogress-course .progress {
+    --bs-progress-height: 6px;
+    height: var(--bs-progress-height);
+
+    .progress-bar {
+        background: var(--clr-theme-1) !important;
+    }
+}
+
+.student-profile-reviews-item {
+    border: 1px solid var(--clr-border-17);
+    border-radius: 10px;
+}
+
+.student-profile-reviews-course-title {
+    padding: 15px 20px 15px 20px;
+    border-bottom: 1px solid var(--clr-border-17);
+
+    h5 {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--clr-common-heading);
+        margin-bottom: 0px;
+    }
+}
+
+.student-profile-reviews-text {
+    padding: 20px 20px 20px 20px;
+}
+
+.student-profile-reviews-text-wrap {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+
+    .student-profile-review-icon {
+        a {
+            font-size: 16px;
+            color: var(--clr-theme-2);
+            display: inline-block;
+            margin-right: 3px;
+        }
+
+        i {
+            color: var(--clr-theme-2);
+        }
+    }
+
+}
+
+.student-profile-review-update {
+    &-btn {
+        margin-right: 15px;
+
+        i {
+            margin-right: 3px;
+        }
+
+        &:last-child {
+            margin-right: 0px;
+        }
+    }
+}
+
+.student-profile-review-content {
+    p {
+        margin-bottom: 0px;
+        padding-right: 50px;
+
+        @media #{$sm,$xs} {
+            padding-right: 0px;
+        }
+    }
+}
+
+.student-profile-enroll {
+    ul {
+        border-bottom: 1px solid var(--clr-border-17);
+
+        li {
+            .nav-link {
+                font-size: 16px;
+                color: var(--clr-text-8);
+                font-weight: 600;
+                position: relative;
+
+                &:before {
+                    position: absolute;
+                    content: '';
+                    height: 2px;
+                    width: 0%;
+                    background: var(--clr-theme-1);
+                    left: 0px;
+                    bottom: 0px;
+                    transition: all linear 0.3s;
+                }
+
+                &.active {
+                    color: var(--clr-theme-1);
+
+                    &:before {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.contact-from-input label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.student-profile-setting-cover-img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 250px;
+}
+
+.student-profile-setting-author-img {
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 30px;
+
+    img {
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-top: -75px;
+        border: 5px solid var(--clr-common-white);
+    }
+}
+
+.student-social-profile-link span {
+    display: block;
+    font-weight: 600;
+}
+
+.student-profile-orders {
+    border: 1px solid var(--clr-border-17);
+    border-bottom: 0px;
+}
+
+.student-profile-order {
+    border-bottom: 1px solid var(--clr-border-17);
+    display: flex;
+}
+
+.student-profile-order-name,
+.student-profile-order-price,
+.student-profile-order-status,
+.student-profile-order-method,
+.student-profile-order-date,
+.student-profile-order-duration,
+.student-profile-order-renew {
+    padding-left: 15px;
+
+    h6 {
+        color: var(--clr-common-heading);
+        margin-bottom: 0px;
+        font-size: 16px;
+    }
+
+    span {
+        font-size: 16px;
+        color: var(--clr-text-8);
+    }
+}
+
+.student-profile-order-name,
+.student-profile-order-price,
+.student-profile-order-status,
+.student-profile-order-method,
+.student-profile-order-date,
+.student-profile-order-duration,
+.student-profile-order-renew {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.custom-height-80 {
+    min-height: 80px;
+}
+
+.student-profile-order-name {
+    min-width: 120px;
+    width: 13%;
+}
+
+.student-profile-order-price {
+    min-width: 100px;
+    width: 11%;
+
+    @media only screen and (max-width: 1400px) {
+        min-width: 70px;
+        width: 7%;
+    }
+}
+
+.student-profile-order-status {
+    min-width: 125px;
+    width: 13%;
+
+    @media only screen and (max-width: 1400px) {
+        min-width: 100px;
+        width: 9%;
+    }
+}
+
+.student-profile-order-method {
+    min-width: 160px;
+    width: 17%;
+
+    @media only screen and (max-width: 1400px) {
+        min-width: 125px;
+        width: 13%;
+    }
+}
+
+.student-profile-order-duration {
+    min-width: 130px;
+    width: 14%;
+}
+
+.student-profile-order-date {
+    min-width: 150px;
+    width: 16%;
+
+    @media only screen and (max-width: 1400px) {
+        min-width: 130px;
+        width: 12%;
+    }
+}
+
+.student-profile-order-renew {
+    .edu-btn {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 30px;
+    }
+}
+
+.inprogress-course-img img {
+    min-height: 100%;
+}
+
+.student-profile-orders-wrapper {
+    @media only screen and (max-width: 1400px) {
+        overflow-x: auto;
+    }
+}
+
+.student-profile-orders {
+    @media only screen and (max-width: 1400px) {
+        width: 817px;
+    }
+}

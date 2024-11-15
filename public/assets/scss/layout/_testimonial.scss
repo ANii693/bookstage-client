@@ -1,0 +1,38 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  34. Testimonial css start
+/*----------------------------------------*/
+
+// Testimonial style
+.bd-testimonial {
+	&__thumb {
+		margin-bottom: 40px;
+		img {
+			@include border-radius(50%);
+		}
+	}
+	&__content {
+		p {
+			font-size: 28px;
+			line-height: 38px;
+			margin-bottom: 35px;
+			font-style: italic;
+			@media #{$lg,$sm,$md}{
+				font-size: 24px;
+			}
+			@media #{$xs}{
+				font-size: 20px;
+			}
+		}
+	}
+	&__author{
+		h3 {
+			font-weight: var(--bd-fw-medium);
+			margin-bottom: 3px;
+		}
+		span{
+			font-size: 15px;
+		}
+	}
+}

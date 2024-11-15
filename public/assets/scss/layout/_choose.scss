@@ -1,0 +1,59 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  15. Choose css start
+/*----------------------------------------*/
+
+// Why choose style
+.bd-choose {
+	&__item {
+		@include flexbox();
+		margin-bottom: 50px;
+		&:last-child {
+			margin-bottom: 0px;
+		}
+	}
+	&__content {
+		h4 {
+			margin-bottom: 15px;
+			line-height: 1;
+		}
+		p {
+			margin-bottom: 0px;
+		}
+	}
+	&__wrapper {
+		&.choose-wrapper__left {
+			padding-right: 70px;
+		@media #{$xl,$md}{
+		  padding-right: 30px;
+		}
+		@media #{$lg}{
+		  padding-right: 10px;
+		}
+		@media #{$xs,$sm,$xs}{
+		  padding-right: 0px;
+		}
+		}
+		&.choose-wrapper__right {
+			padding-left: 70px;
+		@media #{$xl}{
+		  padding-left: 30px;
+		}
+		@media #{$md,$sm,$xs}{
+		  padding-left: 0px;
+		}
+		@media #{$lg}{
+		  padding-left: 10px;
+		}
+		}
+	}
+	&__icon {
+		&.choose-icon__left {
+			margin-left: 30px;
+		}
+		&.choose__icon-right {
+			margin-right: 30px;
+		}
+	}
+}

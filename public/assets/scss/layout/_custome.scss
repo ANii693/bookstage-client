@@ -1,0 +1,317 @@
+@use '../utils' as *;
+
+.custome_disable {
+    display: inline-flex;
+    height: 60px;
+    background-color: #a2db7ced;
+    align-items: center;
+    padding: 0 45px;
+    color: var(--clr-common-white);
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #a2db7ced;
+    justify-content: space-evenly;
+    font-weight: var(--bd-fw-medium);
+    text-transform: capitalize;
+    transition: all 0.3s ease-out 0s;
+    justify-content: center;
+
+}
+
+.custome_disable:hover {
+    cursor: default;
+}
+
+.comment-rating ul li span {
+    font-size: 14px;
+    color: var(--clr-theme-2);
+    cursor: pointer;
+}
+
+ul.menu-none {
+    display: none;
+}
+
+
+// input select option in register page 
+
+.bd-postbox__singel-input .gender-select {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    border: 1px solid var(--clr-border-16);
+    background: transparent;
+    font-size: 15px;
+    outline: none;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 0 24px;
+}
+
+
+.contact-from-input .gender-select {
+    height: 60px;
+    width: 100%;
+    background: #f8f8f9;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    outline: 0;
+}
+
+
+// password field
+
+.bd-password-box {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    border: 1px solid var(--clr-border-16);
+    background: transparent;
+    font-size: 15px;
+    outline: none;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 0 24px;
+}
+
+.bd-password-box input {
+    border: none;
+    width: 80%;
+}
+
+
+.category_div_height {
+    height: 150px;
+}
+
+
+// change password  from style
+
+.change-password input {
+    height: 60px;
+    width: 80%;
+    background: #f8f8f9;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 4px;
+    outline: 0;
+}
+
+
+// update and close btn
+
+
+.update-close-btn {
+    height: 35px;
+    background-color: var(--clr-theme-1);
+    padding: 0 25px;
+    display: inline-block;
+    line-height: 30px;
+    font-size: 16px;
+    color: var(--clr-common-white);
+    font-weight: 600;
+    border-radius: 50px;
+    border: 1px solid var(--clr-theme-1);
+}
+
+.icon-user-profile i {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+// login user img
+.header-author-img img {
+    height: 40px !important;
+    width: 40px !important;
+    object-fit: cover;
+    border-radius: 50%;
+    @media #{$xxs} {
+        height: 35px !important;
+        width: 35px !important;
+    }
+}
+.upload-profile-pic img {
+    height: 150px !important;
+    width: 150px !important;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.custome-cursor {
+    cursor: pointer;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.category-nav i {
+    font-size: 26px;
+}
+
+// progress wrap 
+.progress-wrap {
+    @media #{$xs} {
+        right: 15px;
+        bottom: 15px;
+    }
+}
+
+.basic-pagination {
+    & ul {
+        & li {
+            display: inline-block;
+
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+
+            & a,
+            & span {
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+                line-height: 46px;
+                text-align: center;
+                border-radius: 7px;
+                border: 2px solid #f1f1f1;
+                font-size: 18px;
+                font-weight: 600;
+                color: #EBEBEB;
+
+                &:hover,
+                &.current {
+                    background: #699C47;
+                    border-color: #EBEBEB;
+                    color: #EBEBEB;
+                }
+            }
+        }
+    }
+}
+
+
+
+// styling cart elemnet 
+
+.cart-input-box form {
+    border: 5px solid red;
+}
+
+.custome-title-size {
+    font-size: 40px;
+}
+
+
+
+// custome preloader
+
+.or-product-status {
+    height: 30px;
+    width: 50px;
+    background: #EBEBEB;
+}
+
+.ratting-div {
+    height: 30px;
+    width: 50px;
+    background: #EBEBEB;
+}
+
+.or-old-price {
+    height: 30px;
+    width: 50px;
+    background: #EBEBEB;
+}
+
+.or-category-name {
+    height: 20px;
+    width: 180px;
+    background: #EBEBEB;
+}
+
+.or-prodcut-title {
+    height: 30px;
+    width: 160px;
+    background: #EBEBEB;
+    margin-left: 45px;
+    margin-top: -10px;
+}
+
+.og-div-bg {
+    background: #EBEBEB;
+}
+
+.og-custom-div {
+    background: #EBEBEB;
+}
+
+.og-div-bg-2 {
+    background: #EBEBEB;
+    width: 280px;
+    height: 360px;
+}
+
+.og-previewImg {
+    border: 1px solid var(--clr-theme-1);
+}
+
+.user-link {
+    box-shadow: 0 10px 20px 0 rgba(8, 0, 42, .08);
+}
+
+.comment-img {
+    height: 100px;
+    width: 100px;
+}
+.comment-img img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.scrollbox {
+    height: 450px;
+    margin-bottom: 30px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    &::-webkit-scrollbar-button {
+        background: #F0F0F0;
+    }
+    &::-webkit-scrollbar-track-piece {
+        background: #A6A6A6;
+    }
+}
+
+.error-message {
+    color: var(--clr-theme-4);
+    font-size: 12px;
+}
+.cursore_class{
+    cursor: pointer;
+}
+
+// =====
+
+.bd-bn__btn-2 {
+	background-color: var(--clr-theme-1);
+	padding: 0 10px;
+	display: inline-block;
+	font-size: 16px;
+	color: var(--clr-common-white);
+	border-radius: 30px;
+	border: 1px solid var(--clr-theme-1);
+}
+.bd-bn__btn-3 {
+	background-color: rgb(183, 183, 183);
+	padding: 0 10px;
+	display: inline-block;
+	font-size: 16px;
+	color: #242424;
+	border-radius: 30px;
+	border: 1px solid var(--clr-theme-1);
+}

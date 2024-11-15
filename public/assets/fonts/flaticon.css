@@ -1,0 +1,101 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("./flaticon.ttf?9b0a8652cefa245f1ebfde5ed8c794cb") format("truetype"),
+url("./flaticon.woff?9b0a8652cefa245f1ebfde5ed8c794cb") format("woff"),
+url("./flaticon.woff2?9b0a8652cefa245f1ebfde5ed8c794cb") format("woff2"),
+url("./flaticon.eot?9b0a8652cefa245f1ebfde5ed8c794cb#iefix") format("embedded-opentype"),
+url("./flaticon.svg?9b0a8652cefa245f1ebfde5ed8c794cb#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-magnifiying-glass:before {
+    content: "\f101";
+}
+.flaticon-quote:before {
+    content: "\f102";
+}
+.flaticon-plant:before {
+    content: "\f103";
+}
+.flaticon-planting:before {
+    content: "\f104";
+}
+.flaticon-delivery-truck:before {
+    content: "\f105";
+}
+.flaticon-return:before {
+    content: "\f106";
+}
+.flaticon-shield:before {
+    content: "\f107";
+}
+.flaticon-email:before {
+    content: "\f108";
+}
+.flaticon-options:before {
+    content: "\f109";
+}
+.flaticon-testing:before {
+    content: "\f10a";
+}
+.flaticon-delivery:before {
+    content: "\f10b";
+}
+.flaticon-marketing:before {
+    content: "\f10c";
+}
+.flaticon-consumer:before {
+    content: "\f10d";
+}
+.flaticon-healthy-food:before {
+    content: "\f10e";
+}
+.flaticon-harvest:before {
+    content: "\f10f";
+}
+.flaticon-ice-cream:before {
+    content: "\f110";
+}
+.flaticon-basket:before {
+    content: "\f111";
+}
+.flaticon-garlic:before {
+    content: "\f112";
+}
+.flaticon-cauliflower:before {
+    content: "\f113";
+}
+.flaticon-planting-1:before {
+    content: "\f114";
+}
+.flaticon-olive-oil:before {
+    content: "\f115";
+}
+.flaticon-planet-earth:before {
+    content: "\f116";
+}
+.flaticon-fast-delivery:before {
+    content: "\f117";
+}
+.flaticon-products:before {
+    content: "\f118";
+}
+.flaticon-shield-1:before {
+    content: "\f119";
+}
+.flaticon-fast-delivery-1:before {
+    content: "\f11a";
+}
+.flaticon-share:before {
+    content: "\f11b";
+}

@@ -1,0 +1,48 @@
+
+@use "../utils" as *;
+  
+// counter
+.counter-wrapper {
+	padding: 50px 30px 50px 30px;
+	background-color: var(--clr-bg-grey-2);
+}
+// homepage-2
+.count-number {
+	span {
+		font-size: 36px;
+		font-weight: 700;
+		margin-bottom: 10px;
+		display: inline-block;
+		color: var(--clr-common-heading);
+	}
+	p {
+		font-size: 18px;
+		font-weight: 600;
+		margin-bottom: 0px;
+	}
+}
+.counter-icon svg {
+	margin-bottom: 30px;
+}
+// university-couner
+.counter-img {
+	svg {
+		margin-bottom: 25px;
+	}
+}
+.university-couner-text {
+	span {
+		font-size: 36px;
+		font-weight: 700;
+		color: var(--clr-common-white);
+		margin-bottom: 15px;
+		display: inline-block;
+	}
+}
+.university-couner-text {
+	p {
+		font-size: 18px;
+		font-weight: 600;
+		color: var(--clr-common-white);
+	}
+}

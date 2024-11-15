@@ -1,0 +1,93 @@
+@use '../utils' as *; 
+
+/*----------------------------------------*/
+/*  19. Features css start
+/*----------------------------------------*/
+
+// Features style
+.bd-features {
+	&__item {
+		@include flexbox();
+		align-items: center;
+		gap: 20px;
+		position: relative;
+		justify-content: center;
+		@media #{$sm,$xs}{
+			flex-direction: column;
+		}
+		&:hover {
+			.bd-features__icon {
+				background: var(--clr-theme-1);
+				svg * {
+					fill: var(--clr-common-white);
+				}
+			}
+		}
+		&::before {
+			position: absolute;
+			content: "";
+			height: 100%;
+			width: 1px;
+			background: var(--clr-border-2);
+			right: -15px;
+			transform: translateX(-50%);
+			@media #{$md,$sm,$xs}{
+				display: none;
+			}
+		}
+	}
+	&__icon {
+		height: 55px;
+		width: 55px;
+		background: var(--clr-bg-grey);
+		@include flexbox();
+		@include transition(.3s);
+		align-items: center;
+		justify-content: space-evenly;
+		border-radius: 50%;
+		i {
+			color: var(--clr-common-heading);
+			font-size: 20px;
+			line-height: 0;
+		}
+	}
+	&__content {
+		h4 {
+			margin-bottom: 0;
+		}
+		a {
+			&:hover {
+				color: var(--clr-theme-1);
+			}
+		}
+	}
+}
+.row {
+	>div {
+		&:last-child {
+			.bd-features__item {
+				&::before {
+					display: none;
+				}
+			}
+		}
+	}
+}
+// Small Features style
+.bd-sm {
+	&__features {
+		&-wrapper {
+			border: 1px solid var(--clr-border-4);
+			padding: 30px 0px;
+			.bd-features__item {
+				padding: 0px 20px 20px 20px;
+				justify-content: inherit;
+				border-bottom: 1px solid var(--clr-border-4);
+				&:last-child {
+					border-bottom: 0;
+					padding-bottom: 0;
+				}
+			}
+		}
+	}
+}

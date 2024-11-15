@@ -1,0 +1,20 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  24. Google map css 
+/*----------------------------------------*/
+
+
+// Google map
+.bd-google {
+	&__map {
+		&-area {
+			iframe {
+				@include border-radius(10px);
+				min-height: 450px;
+				width: 100%;
+			}
+		}
+	}
+	
+}

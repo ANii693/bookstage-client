@@ -1,0 +1,12 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  13. Brand css start 
+/*----------------------------------------*/
+
+// Brand style css
+.bd-singel {
+	&__brand {
+		text-align: center;
+	}
+}

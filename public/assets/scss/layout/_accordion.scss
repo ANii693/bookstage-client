@@ -1,0 +1,75 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  11. Accordiong css start
+/*----------------------------------------*/
+
+// Accordiong style
+.bd-faq {
+	&__accordion {
+		.accordion-button {
+			padding: 25px;
+			font-size: 18px;
+			color: var(--clr-common-heading);
+			font-weight: var(--bd-fw-sbold);
+			padding-right: 35px;
+			border: 0;
+			&:focus {
+				z-index: 3;
+				border: none;
+				outline: 0;
+				box-shadow: none;
+			}
+			&:not(.collapsed) {
+				color: var(--clr-common-heading);
+				content: "";
+				background-color: var(--clr-common-white);
+				box-shadow: none;
+				border: 0;
+			}
+			&:not(.collapsed)::after {
+				background: none;
+				transform: rotate(180deg);
+				content: "";
+				position: absolute;
+				right: 25px;
+				top: 25px;
+				font-family: var(--bd-ff-fontawesome);
+				@media #{$xs}{
+					right: 15px;
+				}
+			}
+			&::after {
+				background: none;
+				color: var(--clr-common-heading);
+				content: "\f067";
+				position: absolute;
+				right: 20px;
+				top: 25px;
+				font-family: var(--bd-ff-fontawesome);
+				font-weight: 400;
+				@include transition (.3s);
+				@media #{$xs}{
+					right: 15px;
+				}
+			}
+		}
+		.accordion-item {
+			border: 1px solid var(--clr-border-4);
+			margin-bottom: 20px;
+			@include border-radius(5px);
+		}
+		.accordion-collapse {
+			border: 0;
+		}
+		.accordion-body {
+			padding: 0px 25px 20px 25px;
+			margin-top: -10px;
+			p {
+				line-height: 26px;
+				margin-bottom: 0;
+				margin-top: 3px;
+			}
+		}
+	}
+}

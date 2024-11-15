@@ -1,0 +1,85 @@
+
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  21. Gallery css start 
+/*----------------------------------------*/
+
+
+// Gallery style
+.bd-singel {
+	&__gallery {
+		&-item {
+			position: relative;
+			&:hover {
+				.bd-gallery__action {
+					opacity: 1;
+					visibility: visible;
+				}
+				.bd-gallery-thumb {
+					&::before {
+						opacity: 0.7;
+						visibility: visible;
+					}
+					img {
+						-webkit-transform: rotate(-2deg) scale(1.1);
+						-moz-transform: rotate(-2deg) scale(1.1);
+						-ms-transform: rotate(-2deg) scale(1.1);
+						-o-transform: rotate(-2deg) scale(1.1);
+						transform: rotate(-2deg) scale(1.1);
+					}
+				}
+			}
+		}
+		&-tumb {
+			position: relative;
+			&:before {
+				position: absolute;
+				content: "";
+				height: 100%;
+				width: 100%;
+				background-color: var(--clr-common-heading);
+				opacity: 0;
+			}
+		}
+	}
+}
+.bd-gallery {
+	&__action {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		opacity: 0;
+		visibility: hidden;
+		z-index: 3;
+		a {
+			height: 50px;
+			width: 50px;
+			background: var(--clr-common-white);
+			text-align: center;
+			line-height: 50px;
+			border-radius: 50%;
+			display: inline-block;
+			border-radius: 50%;
+			&:hover {
+				background-color: var(--clr-theme-1);
+				color: var(--clr-common-white);
+			}
+		}
+	}
+	&-thumb {
+		position: relative;
+		overflow: hidden;
+		&::before {
+			position: absolute;
+			content: "";
+			height: 100%;
+			width: 100%;
+			background-color: var(--clr-common-heading);
+			opacity: 0;
+			z-index: 2;
+		}
+	}
+}
+

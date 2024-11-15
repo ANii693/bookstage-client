@@ -1,0 +1,21 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  04. Breadcrumb css start
+/*----------------------------------------*/
+
+// Breadcrumb style
+.breadcrumb__list {
+	span {
+		margin-right: 5px;
+		font-size: 15px;
+		a {
+			&:hover {
+				color: var(--clr-common-heading);
+			}
+		}
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

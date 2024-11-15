@@ -1,0 +1,236 @@
+@use '../utils' as *;
+
+/*----------------------------------------*/
+/*  29. Product css start
+/*----------------------------------------*/
+
+// Product style css
+.bd-product {
+	&__thumb {
+		background: var(--clr-bg-grey);
+		margin-bottom: 20px;
+		position: relative;
+		@include transition(.5s);
+		img {
+			padding: 35px 35px 35px 35px;
+			@media #{$lg,$md,$sm,$xs}{
+				padding: 35px 20px 35px 20px;
+			}
+		}
+	}
+	&__item {
+		overflow: hidden;
+		&:hover {
+			.bd-product__thumb {
+				img {
+					transform: scale3d(1.07, 1.07, 1.07) translateZ(0);
+					-webkit-transform: scale3d(1.07, 1.07, 1.07) translateZ(0);
+				}
+			}
+		}
+	}
+	&__tag {
+		position: absolute;
+		top: 0;
+		left: 0;
+		.tag-text {
+			display: inline-block;
+			color: var(--clr-common-white);
+			padding: 7px 12px;
+			line-height: 1;
+			font-size: 15px;
+			&.color-black {
+				color: var(--clr-common-heading);
+			}
+		}
+	}
+	&__title {
+		color: var(--clr-common-heading);
+		margin-bottom: 5px;
+		a {
+			&:hover {
+				color: var(--clr-theme-1);
+			}
+		}
+	}
+	&__old-price {
+		color: var(--clr-text-3);
+		margin-right: 10px;
+	}
+	&__new-price {
+		color: var(--clr-text-5);
+		font-weight: var(--bd-fw-sbold);
+		font-size: 18px;
+		margin-left:0;
+	}
+	&__icon {
+		i {
+			font-size: 13px;
+			color: var(--clr-theme-2);
+		}
+	}
+	&__action {
+		position: absolute;
+		bottom: 25px;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		opacity: 0;
+		visibility: hidden;
+		@include transition(.3s);
+		a,
+		span {
+			height: 45px;
+			width: 45px;
+			display: inline-flex;
+			text-align: center;
+			background: var(--clr-common-white);
+			align-items: center;
+			justify-content: space-evenly;
+			border-radius: 50%;
+			color: var(--clr-common-heading);
+			box-shadow: 0px 10px 20px 0px rgba(8, 0, 42, 0.08);
+			margin-left: 7px;
+			transform: scaleX(0);
+			cursor: pointer;
+			&:hover {
+				background: var(--clr-theme-1);
+				color: var(--clr-common-white);
+			}
+			&:first-child {
+				margin-left: 0;
+			}
+		}
+	}
+	&__item {
+		&:hover {
+			.bd-product__action {
+				opacity: 1;
+				visibility: visible;
+				a,span {
+					transform: scaleX(1);
+				}
+			}
+		}
+	}
+}
+.bd-trending {
+	&__item {
+		&:hover {
+			.bd-product__action {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+		&.text-center {
+			&:hover {
+				.bd-product__action {
+					a,span {
+						transform: scale(1);
+					}
+				}
+			}
+		}
+	}
+}
+.bd__product-details-menu-3 ul li .wishlist-btn {
+	color: var(--clr-common-heading);
+	cursor: pointer;
+	i {
+		display: inline-block;
+		margin-right: 3px;
+	}
+	&:hover {
+		color: var(--clr-theme-1);
+	}
+}
+// Bootstrap tab style
+.bd-bananna-nav {
+	.nav {
+		gap: 80px;
+		@media #{$xl}{
+			gap: 30px;
+		}
+		@media #{$lg}{
+			gap: 25px;
+		}
+		@media #{$md}{
+			gap: 50px;
+		}
+		@media #{$sm}{
+			gap: 20px 50px;
+		}
+		@media #{$xs}{
+			gap: 20px 40px;
+		}
+		&.nav-tabs {
+			button {
+				@include flexbox();
+				flex-direction: column-reverse;
+				gap: 5px;
+			}
+		}
+	}
+	.nav-tabs {
+		border-bottom: 0;
+		justify-content: flex-end;
+		@media #{$xs,$sm,$md}{
+			justify-content: flex-start;
+		}
+		.nav-link {
+			border-top-right-radius: 0;
+			position: relative;
+			font-weight: var(--bd-fw-medium);
+			border-color: 1px solid transparent;
+			&.active {
+				border-color: transparent;
+				color: var(--clr-theme-1);
+			}
+			&:before {
+				position: absolute;
+				content: "";
+				height: 100%;
+				width: 1px;
+				background: var(--clr-border-19);
+				right: -40px;
+				@media #{$xl,$lg,$md,$sm,$xs}{
+					display: none;
+				}
+			}
+			&:last-child {
+				&:before {
+					display: none;
+				}
+			}
+			&:first-child {
+				margin-left: 0;
+			}
+		}
+	}
+	.nav-link {
+		display: block;
+		padding: 0;
+		color: #777777;
+	}
+}
+.bd-bananna-nav {
+	.nav-tabs {
+		.nav-link {
+			&.active {
+				svg {
+					* {
+						fill: var(--clr-theme-1);
+					}
+				}
+			}
+		}
+	}
+}
+.bd-bananna-nav .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+	border-color: transparent;
+}
+.bd-bananna-nav .nav-link:focus, .nav-link:hover {
+	color: inherit;
+}
+
+
