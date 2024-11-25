@@ -61,8 +61,8 @@ const CartSection = () => {
                       <tr>
                         <th className="product-thumbnail">Images</th>
                         <th className="cart-product-name">Product</th>
-                        {/* <th className="product-price">Unit Price</th> */}
-                        {/* <th className="product-quantity">Quantity</th> */}
+                        <th className="product-price">Unit Price</th>
+                        <th className="product-quantity">Quantity</th>
                         <th className="product-subtotal">Total</th>
                         <th className="product-remove">Remove</th>
                       </tr>
@@ -86,10 +86,10 @@ const CartSection = () => {
                               {item.productName}
                             </Link>
                           </td>
-                          {/* <td className="product-price">
+                          <td className="product-price">
                             <span className="amount">${item.price}</span>
-                          </td> */}
-                          {/* <td className="product-quantity text-center">
+                          </td>
+                          <td className="product-quantity text-center">
                             <div className="product-quantity mt-10 mb-10">
                               <div className="product-quantity-form">
                                 <form onSubmit={(e) => e.preventDefault()}>
@@ -116,10 +116,10 @@ const CartSection = () => {
                                 </form>
                               </div>
                             </div>
-                          </td> */}
+                          </td>
                           <td className="product-subtotal">
                             <span className="amount">
-                              ${item.price}
+                              ${item.totalCard * item.price}
                             </span>
                           </td>
                           <td
@@ -158,9 +158,8 @@ const CartSection = () => {
                         <li>
                           Subtotal <span>${totalPrice}</span>
                         </li>
-                        <li>GST <span>18%</span></li>
                         <li>
-                          Total <span>${totalPrice *0.18 + totalPrice}</span>
+                          Total <span>${totalPrice}</span>
                         </li>
                       </ul>
                       <Link className="bd-border__btn" href="/checkout">

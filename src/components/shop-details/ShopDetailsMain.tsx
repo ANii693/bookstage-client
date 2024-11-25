@@ -20,7 +20,7 @@ import GetRatting from "@/hooks/GetRatting";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { wishlist_product } from "@/redux/slices/wishlistSlice";
-import BookButton from "./BookButton";
+
 const ShopDetailsMain = ({ id }: any) => {
   const dispatch = useDispatch();
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
@@ -52,6 +52,16 @@ const ShopDetailsMain = ({ id }: any) => {
   );
   const quantity = cartProducts.find((item) => item?._id === myProduct?._id);
   const totalCart = quantity?.totalCard;
+
+  const handleBookNow = () => {
+    // Implement booking logic here
+    // For now, we'll just add to cart and navigate to cart
+    if (myProduct) {
+      dispatch(cart_product(myProduct));
+      window.location.href = '/cart';
+    }
+  };
+
   return (
     <>
       <Breadcrumb breadHome={"Home"} breadMenu={"Shop Details"} />
@@ -173,8 +183,8 @@ const ShopDetailsMain = ({ id }: any) => {
                       </div>
                       <h3>{myProduct?.productName}</h3>
                       <div className="product-price">
-                        <span>₹{myProduct?.price}.00</span>
-                        <del>₹{myProduct?.oldPrice}.00</del>
+                        <span>${myProduct?.price}.00</span>
+                        <del>${myProduct?.oldPrice}.00</del>
                       </div>
                       {myProduct?.productQuantity > 0 ? (
                         <>
@@ -194,22 +204,7 @@ const ShopDetailsMain = ({ id }: any) => {
                         <></>
                       )}
 
-<div className="product-quantity-cart mb-25">
-  {myProduct?.productQuantity > 0 ? (
-    <>
-      <BookButton product={myProduct} />
-      <span data-bs-dismiss="modal" aria-label="Close">
-        <Link className="cart-btn bd-fill__btn" href="/cart">
-          <i className="fal fa-cart-arrow-down"></i> View Cart
-        </Link>
-      </span>
-    </>
-  ) : (
-    <span className="text-danger">This Product Is Out Of Stock</span>
-  )}
-</div>
-
-                      {/* <div className="product-quantity-cart mb-25">
+                      <div className="product-quantity-cart mb-25">
                         {myProduct?.productQuantity > 0 ? (
                           <>
                             {" "}
@@ -236,13 +231,12 @@ const ShopDetailsMain = ({ id }: any) => {
                               </form>
                             </div>
                             <span data-bs-dismiss="modal" aria-label="Close">
-                              <Link
+                              <button
                                 className="cart-btn bd-fill__btn"
-                                href="/cart"
+                                onClick={handleBookNow}
                               >
-                                <i className="fal fa-cart-arrow-down"></i> View
-                                Cart
-                              </Link>
+                                <i className="fal fa-shopping-bag"></i> Book Now
+                              </button>
                             </span>{" "}
                           </>
                         ) : (
@@ -252,7 +246,7 @@ const ShopDetailsMain = ({ id }: any) => {
                             </span>
                           </>
                         )}
-                      </div> */}
+                      </div>
 
                       {myProduct?.productQuantity > 0 ? (
                         <>

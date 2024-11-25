@@ -85,7 +85,7 @@ const SidebarCart = () => {
                                   {item.productName}
                                 </Link>
                               </h5>
-                              {/* <div className="product-quantity mt-10 mb-10">
+                              <div className="product-quantity mt-10 mb-10">
                                 <span
                                   className="cart-minus"
                                   onClick={() => handDecressCart(item)}
@@ -104,7 +104,7 @@ const SidebarCart = () => {
                                 >
                                   +
                                 </span>
-                              </div> */}
+                              </div>
                               <div className="product__sm-price-wrapper">
                                 <span className="product__sm-price">
                                   ${productPrice}
