@@ -107,7 +107,7 @@ const SidebarCart = () => {
                               </div>
                               <div className="product__sm-price-wrapper">
                                 <span className="product__sm-price">
-                                  ${productPrice}
+                                 ₹{productPrice}
                                 </span>
                               </div>
                             </div>
@@ -125,7 +125,7 @@ const SidebarCart = () => {
                   <div className="cartmini__checkout">
                     <div className="cartmini__checkout-title mb-30">
                       <h4>Subtotal:</h4>
-                      <span className="subtotal-price">${totalPrice}</span>
+                      <span className="subtotal-price">₹{totalPrice}</span>
                     </div>
                     <div className="cartmini__checkout-btn">
                       <Link onClick={() => setOpenCart(false)} className="bd-fill__btn w-100" href="/cart">

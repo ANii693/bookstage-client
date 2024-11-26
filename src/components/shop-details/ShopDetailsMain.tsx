@@ -183,8 +183,8 @@ const ShopDetailsMain = ({ id }: any) => {
                       </div>
                       <h3>{myProduct?.productName}</h3>
                       <div className="product-price">
-                        <span>${myProduct?.price}.00</span>
-                        <del>${myProduct?.oldPrice}.00</del>
+                        <span>₹{myProduct?.price}.00</span>
+                        <del>₹{myProduct?.oldPrice}.00</del>
                       </div>
                       {myProduct?.productQuantity > 0 ? (
                         <>

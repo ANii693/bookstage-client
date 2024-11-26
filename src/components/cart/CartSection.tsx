@@ -87,7 +87,7 @@ const CartSection = () => {
                             </Link>
                           </td>
                           <td className="product-price">
-                            <span className="amount">${item.price}</span>
+                            <span className="amount">₹{item.price}</span>
                           </td>
                           <td className="product-quantity text-center">
                             <div className="product-quantity mt-10 mb-10">
@@ -119,7 +119,7 @@ const CartSection = () => {
                           </td>
                           <td className="product-subtotal">
                             <span className="amount">
-                              ${item.totalCard * item.price}
+                              ₹{item.totalCard * item.price}
                             </span>
                           </td>
                           <td
@@ -156,10 +156,10 @@ const CartSection = () => {
                       <h2>Cart totals</h2>
                       <ul className="mb-20">
                         <li>
-                          Subtotal <span>${totalPrice}</span>
+                          Subtotal <span>₹{totalPrice}</span>
                         </li>
                         <li>
-                          Total <span>${totalPrice}</span>
+                          Total <span>₹{totalPrice}</span>
                         </li>
                       </ul>
                       <Link className="bd-border__btn" href="/checkout">
