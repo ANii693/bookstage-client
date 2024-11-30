@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-const Product: React.FC = () => {
+const Product: React.FC = (prop) => {
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
   const amount = 100;
@@ -39,7 +39,7 @@ const Product: React.FC = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/payment/order", {
+      const response = await fetch(`${process.env.BASE_URL}payment/order`, {
         method: "POST",
         body: JSON.stringify({
           amount,
@@ -72,7 +72,7 @@ const Product: React.FC = () => {
           };
 
           const validateRes = await fetch(
-            "http://localhost:5000/payment/order/validate",
+            `${process.env.BASE_URL}payment/order/validate`,
             {
               method: "POST",
               body: JSON.stringify(body),
@@ -118,8 +118,8 @@ const Product: React.FC = () => {
 
   return (
     <div className="product">
-      <h2>Tshirt</h2>
-      <p>Solid blue cotton Tshirt</p>
+      <h2>Speaking Skills</h2>
+      <p>Gain Confidence</p>
       <br />
       <button onClick={paymentHandler} disabled={!razorpayLoaded}>
         Pay
