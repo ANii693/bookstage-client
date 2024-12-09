@@ -57,19 +57,19 @@ const ProfileSidebar = () => {
             </button>
           </li>
           <li className="nav-item" role="presentation">
-  <button
-    className="nav-link"
-    id="upload-documents-tab"
-    data-bs-toggle="tab"
-    data-bs-target="#upload-documents"
-    type="button"
-    role="tab"
-    aria-controls="upload-documents"
-    aria-selected="false"
-  >
-    <i className="fas fa-file-upload"></i> Upload Documents
-  </button>
-</li>
+            <button
+              className="nav-link"
+              id="upload-documents-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#upload-documents"
+              type="button"
+              role="tab"
+              aria-controls="upload-documents"
+              aria-selected="false"
+            >
+              <i className="fas fa-file-upload"></i> Upload Documents
+            </button>
+          </li>
 
           <li className="nav-item" role="presentation">
             <button
@@ -99,7 +99,7 @@ const ProfileSidebar = () => {
               <i className="fas fa-star"></i> Reviews
             </button>
           </li>
-          <li className="nav-item" role="presentation">
+          {/* <li className="nav-item" role="presentation">
             <button
               className="nav-link"
               id="comments-tab"
@@ -112,7 +112,7 @@ const ProfileSidebar = () => {
             >
               <i className="fa-solid fa-comment"></i> My Comments
             </button>
-          </li>
+          </li> */}
 
           <li className="nav-item" role="presentation">
             <button
@@ -128,7 +128,7 @@ const ProfileSidebar = () => {
               <i className="fas fa-cog"></i> Settings
             </button>
           </li>
-          <li className="nav-item" role="presentation">
+          {/* <li className="nav-item" role="presentation">
             <button
               className="nav-link"
               id="cancel-tab"
@@ -141,7 +141,7 @@ const ProfileSidebar = () => {
             >
               <i className="fas fa-cog"></i> Cancel Orders
             </button>
-          </li>
+          </li> */}
           {user?.role === "admin" && (
             <li className="nav-item" role="presentation">
               <button onClick={handleAdminPannel} className="nav-link">

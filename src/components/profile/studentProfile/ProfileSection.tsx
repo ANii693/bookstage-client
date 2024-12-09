@@ -76,7 +76,7 @@ const ProfileSection = () => {
                   <MyProfile />
                 </div>
 
-               
+
 
                 <div
                   className="tab-pane fade"
@@ -87,7 +87,7 @@ const ProfileSection = () => {
                   <h4 className="mb-25">Payment Info</h4>
                   <div className="student-profile-wishlist">
                     <div className="row">
-                      <PaymentInfo/>
+                      <PaymentInfo />
                     </div>
                   </div>
                 </div>
@@ -109,7 +109,7 @@ const ProfileSection = () => {
                   aria-labelledby="comments-tab"
                 >
                   <h4 className="mb-25">Comments</h4>
-                  <UserComments/>
+                  <UserComments />
                 </div>
 
                 <div
@@ -119,17 +119,17 @@ const ProfileSection = () => {
                   aria-labelledby="history-tab"
                 >
                   <h4 className="mb-25">Order History</h4>
-                  <OrderHistory/>
+                  <OrderHistory />
                 </div>
                 <div
-  className="tab-pane fade"
-  id="upload-documents"
-  role="tabpanel"
-  aria-labelledby="upload-documents-tab"
->
-  <h4 className="mb-25">Upload Documents</h4>
-  <DocumentUploadForm />
-</div>
+                  className="tab-pane fade"
+                  id="upload-documents"
+                  role="tabpanel"
+                  aria-labelledby="upload-documents-tab"
+                >
+                  <h4 className="mb-25">Upload Documents</h4>
+                  <DocumentUploadForm />
+                </div>
                 <div
                   className="tab-pane fade"
                   id="cancel"
@@ -137,7 +137,7 @@ const ProfileSection = () => {
                   aria-labelledby="cancel-tab"
                 >
                   <h4 className="mb-25">Cancel Orders</h4>
-                  <CancelOrderTrack/>
+                  <CancelOrderTrack />
                 </div>
 
                 <div

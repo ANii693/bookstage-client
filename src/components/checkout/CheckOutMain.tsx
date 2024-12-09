@@ -432,6 +432,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { clear_cart_after_payment } from "@/redux/slices/cartSlice";
+import { log } from "console";
 
 declare global {
   interface Window {
@@ -464,6 +465,13 @@ const CheckOutMain = () => {
     (total, product) => total + (product.price ?? 0) * (product.totalCard ?? 0),
     0
   );
+  const payment_description = cartProducts
+    .map(
+      (product) =>
+        `${product.productName} (₹${product.price} x ${product.totalCard})`
+    )
+    .join(", ") + ` | Total Price: ₹${totalPrice}`;
+
 
   const handleGoToShopPage = () => {
     router.push("/shop");
@@ -499,9 +507,12 @@ const CheckOutMain = () => {
       const response = await fetch(`${process.env.BASE_URL}payment/order`, {
         method: "POST",
         body: JSON.stringify({
-          amount: totalPrice * 100, // Convert to paise for Razorpay
-          currency: "INR",
-          receipt: `receipt_${Math.random().toString(36).substring(7)}`,
+          options: {
+            amount: totalPrice * 100, // Convert to paise for Razorpay
+            currency: "INR",
+            receipt: `receipt_${Math.random().toString(36).substring(7)}`,
+          },
+
         }),
         headers: {
           "Content-Type": "application/json",
@@ -518,15 +529,32 @@ const CheckOutMain = () => {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Your Razorpay Key ID
         amount: totalPrice * 100, // Amount in currency subunits
         currency: "INR",
-        name: "Your Store Name",
-        description: "Order Payment",
+        name: "Book My Stage",
+        description: payment_description,
         order_id: order.id, // Razorpay order ID
         handler: async (response: any) => {
           const validateRes = await fetch(
             `${process.env.BASE_URL}payment/order/validate`,
             {
               method: "POST",
-              body: JSON.stringify(response),
+              body: JSON.stringify({
+                response: response,
+                user: {
+                  buyerEmail: user?.email,
+                  name: user?.name,
+                  Address: data.Address,
+                  City: data.City,
+                  Postcode: data.Postcode,
+                  EmailAddress: data.EmailAddress,
+                  date,
+                  Phone: user?.phone,
+                  totalPrice,
+                  orderProducts: cartProducts,
+                  paymentId: "",
+                  shipmentStatus: "pending",
+                  shipmentStatusArray: [],
+                }
+              }),
               headers: {
                 "Content-Type": "application/json",
               },
@@ -534,49 +562,21 @@ const CheckOutMain = () => {
           );
 
           const jsonRes = await validateRes.json();
-          if (jsonRes.success) {
-            const sellProductInfo = {
-              buyerEmail: user?.email,
-              name: data.Fname,
-              Address: data.Address,
-              City: data.City,
-              Postcode: data.Postcode,
-              EmailAddress: data.EmailAddress,
-              date,
-              Phone: data.Phone,
-              totalPrice,
-              orderProducts: cartProducts,
-              paymentId: response.razorpay_payment_id,
-              shipmentStatus: "pending",
-              shipmentStatusArray: [],
-            };
-
-            axios
-              .post(
-                `${process.env.BASE_URL}success/save-payment-info?email=${user?.email}`,
-                sellProductInfo,
-                header
-              )
-              .then((res) => {
-                if (res.data.message === "success") {
-                  router.push("/profile");
-                  dispatch(clear_cart_after_payment());
-                  setPaymentSuccess(true);
-                  toast.success(`Payment Success`, {
-                    position: "top-left",
-                  });
-                }
-              })
-              .catch((error) => {
-                console.error("Failed to save payment info", error);
-                setPaymentSuccess(false);
-              });
+          if (jsonRes.msg = "success") {
+            router.push("/profile");
+            dispatch(clear_cart_after_payment());
+            setPaymentSuccess(true);
+            toast.success(`Payment Success`, {
+              position: "top-left",
+            });
           }
+
         },
         prefill: {
           name: data.Fname,
           email: data.EmailAddress,
-          contact: data.Phone,
+          contact: data.Phone || 9999999999,
+          address: data.Address,
         },
         notes: {
           address: data.Address,
@@ -738,7 +738,7 @@ const CheckOutMain = () => {
                     </div>
                   </div>
                 </div>
-                
+
               </div>
 
               {/* order info */}
@@ -765,7 +765,7 @@ const CheckOutMain = () => {
                             </td>
                             <td className="product-total">
                               <span className="amount">
-                                ${item?.totalCard * item.price}
+                                ₹{item?.totalCard * item.price}
                               </span>
                             </td>
                           </tr>
@@ -775,34 +775,34 @@ const CheckOutMain = () => {
                         <tr className="cart-subtotal">
                           <th>Cart Subtotal</th>
                           <td>
-                            <span className="amount">${totalPrice}</span>
+                            <span className="amount">₹{totalPrice}</span>
                           </td>
                         </tr>
                         <tr className="order-total">
                           <th>Order Total</th>
                           <td>
                             <strong>
-                              <span className="amount">${totalPrice}</span>
+                              <span className="amount">₹{totalPrice}</span>
                             </strong>
                           </td>
                         </tr>
                       </tfoot>
                     </table>
                     <div className="order-button-payment mt-20">
-                    {cartProducts.length ? (
-                      <button
-                        type="submit"
-                        className="bd-fill__btn"
-                        disabled={!razorpayLoaded}
-                      >
-                        Place Order
-                      </button>
-                    ) : (
-                      <button onClick={handleGoToShopPage} className="bd-fill__btn">
-                        Add Product For Checkout
-                      </button>
-                    )}
-                  </div>
+                      {cartProducts.length ? (
+                        <button
+                          type="submit"
+                          className="bd-fill__btn"
+                          disabled={!razorpayLoaded}
+                        >
+                          Place Order
+                        </button>
+                      ) : (
+                        <button onClick={handleGoToShopPage} className="bd-fill__btn">
+                          Add Product For Checkout
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
