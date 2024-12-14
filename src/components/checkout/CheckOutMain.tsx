@@ -504,7 +504,7 @@ const CheckOutMain = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.BASE_URL}payment/order`, {
+      const response = await fetch(`https://bookingstage-server.vercel.app/payment/order`, {
         method: "POST",
         body: JSON.stringify({
           options: {
@@ -534,7 +534,7 @@ const CheckOutMain = () => {
         order_id: order.id, // Razorpay order ID
         handler: async (response: any) => {
           const validateRes = await fetch(
-            `${process.env.BASE_URL}payment/order/validate`,
+            `https://bookingstage-server.vercel.app/payment/order/validate`,
             {
               method: "POST",
               body: JSON.stringify({
