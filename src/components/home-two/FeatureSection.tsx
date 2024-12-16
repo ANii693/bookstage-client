@@ -17,8 +17,8 @@ const FeatureSection = () => {
                                 <FeatureIconOne />
                             </div>
                             <div className="bd-features__content">
-                                <h4><Link href="/shop">Free Shipping</Link></h4>
-                                <span>On All Order Over $599</span>
+                                <h4><Link href="/shop">Free Service</Link></h4>
+                                <span>On All Order </span>
                             </div>
                         </div>
                     </div>

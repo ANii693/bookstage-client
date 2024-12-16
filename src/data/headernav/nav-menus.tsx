@@ -47,6 +47,11 @@ const nav_menus_list:NavMenuItem[] = [
   //     },
   //   ]
   // },
+  {id:2,
+    link: '/dashboard',
+    title: 'Dashboard',
+    dropdownItems: []
+  },
   {
     id:3,
     link: '',

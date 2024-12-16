@@ -15,8 +15,8 @@ const ShippingInfo = () => {
                     <ShippingIcon/>
                 </div>
                 <div className="bd-features__content">
-                    <h4><Link href="/about">Free Shipping</Link></h4>
-                    <span>On All Order Over $599</span>
+                    <h4><Link href="/about">Free Service</Link></h4>
+                    <span>On All Order are Taken care</span>
                 </div>
             </div>
             <div className="bd-features__item mb-20">

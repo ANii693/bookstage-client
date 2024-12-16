@@ -47,11 +47,11 @@ const HeroSectionTwo = () => {
                 </div>
                 <div className="bd-banner__content-2">
                   <h2>
-                  Children&apos;s <br /> Fresh Toys
+                  Showcase <br /> Your talent
                   </h2>
                   <p>
-                  Play Your Way: Rent, Buy, Create, Repair, and Share {" "}
-                    <br /> Where Every Toy Tells Your Story{" "}
+                  {/* Play Your Way: Rent, Buy, Create, Repair, and Share {" "}
+                    <br /> Where Every Toy Tells Your Story{" "} */}
                   </p>
                   <div className="bd-banner__btn">
                     <Link className="bd-bn__btn-1" href="/shop">

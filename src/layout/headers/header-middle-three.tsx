@@ -8,13 +8,13 @@ const HeaderMiddleThree = () => {
                 <div className="row align-items-center">
                     <div className="col-xxl-6 col-xl-6 col-md-8">
                         <div className="bd-topbar__contact">
-                            <ul>
+                            {/* <ul>
                                 <li><Link href="tel:+(02)587-898-250"><i className="fa-regular fa-phone-flip"></i>+(02) 587 - 898 -250</Link></li>
                                 <li><Link href=""><i className="fa-solid fa-location-dot"></i>Favicon, New York, USA - 254230</Link></li>
-                            </ul>
+                            </ul> */}
                         </div>
                     </div>
-                    <div className="col-xxl-6 col-xl-6 col-md-4">
+                    {/* <div className="col-xxl-6 col-xl-6 col-md-4">
                         <div className="bd-treak__right bd-treak__right3">
                             <div className="border-lefts">
                                 <select name="lan-select" id="lan-select" className="language-select">
@@ -35,7 +35,7 @@ const HeaderMiddleThree = () => {
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
