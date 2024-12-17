@@ -11,10 +11,10 @@ const HeaderTop = () => {
                             <div className="col-xxl-8 col-xl-8 col-lg-9">
                                 <div className="bd-topbar__regtangle ">
                                     <div className="bd-topbar__contact">
-                                        <ul>
+                                        {/* <ul>
                                             <li><Link href="tel:+(02)587-898-250"><i className="fa-regular fa-phone-flip"></i>+(02) 587 - 898 -250</Link></li>
                                             <li><Link href=""><i className="fa-solid fa-location-dot"></i>Favicon, New York, USA - 254230</Link></li>
-                                        </ul>
+                                        </ul> */}
                                     </div>
                                 </div>
                             </div>

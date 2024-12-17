@@ -82,8 +82,8 @@ const HeaderTopTwo = () => {
                     <div className="col-xxl-6 col-xl-6 col-md-8">
                         <div className="bd-topbar__contact">
                             <ul>
-                                <li><Link href="tel:+(02)587-898-250"><i className="fa-regular fa-phone-flip"></i>+(91) 88888 88888</Link></li>
-                                <li><Link href="#"><i className="fa-solid fa-location-dot"></i>Bangalore, India - 560093</Link></li>
+                                {/* <li><Link href="tel:+(02)587-898-250"><i className="fa-regular fa-phone-flip"></i>+(91) 88888 88888</Link></li>
+                                <li><Link href="#"><i className="fa-solid fa-location-dot"></i>Bangalore, India - 560093</Link></li> */}
                             </ul>
                         </div>
                     </div>
