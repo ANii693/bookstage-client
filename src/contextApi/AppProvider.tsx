@@ -47,6 +47,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [update, setUpdate] = useState<boolean>(false);
   const [dynamicId, setDynamicId] = useState<string>("");
   const [totalProduct, settotalProduct] = useState<number>(0);
+  const [eventDynamicId, setEventDynamicId] = useState<string>("");
 
   const token =localStorage.getItem("accessToken")
   const header = {
@@ -170,7 +171,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     openWishlist,
     setOpenWishlist,
     prodcutLoadding, setProdcutLoadding,
-    update, setUpdate,dynamicId, setDynamicId,totalProduct, settotalProduct
+    update, setUpdate,dynamicId, setDynamicId,totalProduct, settotalProduct, eventDynamicId, setEventDynamicId
   };
 
   return (

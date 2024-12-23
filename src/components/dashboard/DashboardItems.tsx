@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import AddReview from "../shop-details/AddReview";
 
 const DashboardItems = () => {
-  const { user, header, setDynamicId } = useGlobalContext();
+  const { user, header, setDynamicId, setEventDynamicId} = useGlobalContext();
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfoType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [newReview, setNewReview] = useState<boolean>(false);
@@ -129,13 +129,13 @@ const DashboardItems = () => {
                                   <td className="product-name">
                                     <Link href={`/shop-details/${itm._id}`}>
                                       {itm.productName}
-                                    </Link>
+                                    </Link> 
                                   </td>
 
                                   <td className="product-subtotal">
                                     <div className="bd-banner__btn">
                                       <button
-                                        onClick={() => setDynamicId(item?._id)}
+                                        onClick={() => {setDynamicId(item?._id); setEventDynamicId(itm._id)}}
                                         data-toggle="tooltip"
                                         data-placement="top"
                                         title="Quick View"

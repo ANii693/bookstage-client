@@ -69,6 +69,8 @@ export interface AppContextType {
   setPage: React.Dispatch<React.SetStateAction<number>>;
   dynamicId:string;
   setDynamicId: React.Dispatch<React.SetStateAction<string>>;
+  eventDynamicId:string;
+  setEventDynamicId: React.Dispatch<React.SetStateAction<string>>;
   paymentSuccess: boolean;
   setPaymentSuccess: React.Dispatch<React.SetStateAction<boolean>>;
   products: ProductType[];

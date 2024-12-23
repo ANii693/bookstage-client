@@ -8,12 +8,11 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import Image from "next/image";
+import { log } from "console";
 
 interface FormData {
-  name: string;
-  phone: string;
-  address: string;
-  activityName: string;
+  email: string;
+  eventId: string;
 }
 
 interface FileWithPreview extends File {
@@ -22,17 +21,14 @@ interface FileWithPreview extends File {
 
 const OrderTrackModal: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    name: "",
-    phone: "",
-    address: "",
-    activityName: "",
+    email: "",
+    eventId: "",
   });
 
   const [selectedFiles, setSelectedFiles] = useState<FileWithPreview[]>([]);
   const [isDragging, setIsDragging] = useState(false);
-  const { dynamicId } = useGlobalContext();
+  const { dynamicId, eventDynamicId } = useGlobalContext();
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfoType[]>([]);
-  const [videoPreview, setVideoPreview] = useState<string | null>(null);
 
   useEffect(() => {
     axios
@@ -41,26 +37,100 @@ const OrderTrackModal: React.FC = () => {
         setPaymentInfo(res.data.products);
       })
       .catch((e) => {
-        toast.error("Error fetching data: " + e.message, {
-          position: "top-right",
-          autoClose: 5000,
-        });
+        // toast.error("Error fetching data: " + e.message, {
+        //   position: "top-right",
+        //   autoClose: 5000,
+        // });
       });
   }, [dynamicId]);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const addFiles = (files: File[]) => {
     const validFiles = files.filter((file) => file.size <= 50 * 1024 * 1024);
-
     if (validFiles.length !== files.length) {
-      toast.warn("Some files were not added. File size should be less than 50MB", {
+      toast.warn("Some files were too large and not added (max 50MB).");
+    }
+    setSelectedFiles((prev) =>
+      [...prev, ...validFiles].map((file) =>
+        Object.assign(file, {
+          preview: file.type.startsWith("video/") ? URL.createObjectURL(file) : undefined,
+        })
+      )
+    );
+  };
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      addFiles(Array.from(e.target.files));
+    }
+  };
+
+  const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => setIsDragging(false);
+
+  const handleDragOver = (e: DragEvent<HTMLDivElement>) => e.preventDefault();
+
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+    addFiles(Array.from(e.dataTransfer.files));
+  };
+  const useremail = paymentInfo.map((item) => (
+    item.EmailAddress
+  ))
+  const removeFile = (index: number) =>
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+
+    const submissionData = new FormData();
+    submissionData.append("email", useremail[0]);
+    submissionData.append("eventId", eventDynamicId);
+    selectedFiles.forEach((file, index) => {
+      submissionData.append(`files[${index}]`, file);
+    });
+    for (let [key, value] of submissionData.entries()) {
+      console.log(key, value);
+    }
+    try {
+      const response = await axios.post(`${process.env.BASE_URL}submission/event`, submissionData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+  
+      if (response.status === 200) {
+        console.log(submissionData);
+
+        
+        toast.success("Form submitted successfully!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+  
+        // Reset form and files after submission
+        setFormData({
+          email: useremail[0],
+          eventId: eventDynamicId,
+        });
+        setSelectedFiles([]);
+      }
+    } catch (error) {
+      toast.error("Error submitting form: " + (error as Error).message, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -69,114 +139,15 @@ const OrderTrackModal: React.FC = () => {
         draggable: true,
       });
     }
-
-    setSelectedFiles((prevFiles) => [
-      ...prevFiles,
-      ...validFiles.map((file) =>
-        Object.assign(file, {
-          preview: file.type.startsWith("video/") ? URL.createObjectURL(file) : undefined,
-        })
-      ),
-    ]);
   };
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    addFiles(files);
-  };
-
-  const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-  };
-
-  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-
-    const files = Array.from(e.dataTransfer.files);
-    addFiles(files);
-  };
-
-  const removeFile = (index: number) => {
-    setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Handle form submission here (e.g., API call)
-    toast.success("Form submitted successfully!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
-
-    // Reset form and files after submission
-    setFormData({
-      name: "",
-      phone: "",
-      address: "",
-      activityName: "",
-    });
-    setSelectedFiles([]);
-  };
-
-  const getFileIcon = (file: File) => {
-    if (file.type.startsWith("video/")) {
-      return (
-        <svg
-          className="w-3 h-3 text-purple-500"
-          fill="none"
-          height={50}
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-          />
-        </svg>
-      );
-    } else {
-      return (
-        <svg
-          className="w-3 h-3 text-blue-500"
-          fill="none"
-          height={50}
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-          />
-        </svg>
-      );
-    }
-  };
-
+  
+  
+  const getFileIcon = (file: File) =>
+    file.type.startsWith("video/") ? (
+      <span>🎥</span>
+    ) : (
+      <span>📄</span>
+    );
   return (
     <>
       <ToastContainer />
@@ -185,13 +156,14 @@ const OrderTrackModal: React.FC = () => {
         id="orderTrackModal"
         role="dialog"
         aria-hidden="true"
+         aria-labelledby="Event Submission"
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data" >
               {/* Payment Info */}
               <div className="modal-header">
-                <h5 className="modal-title">Submission Form</h5>
+                <h5 className="modal-title">Event Submission Form</h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -206,22 +178,22 @@ const OrderTrackModal: React.FC = () => {
                     <p key={item._id}>Order ID: {item.orderId}</p>
                   ))}
                 </div>
-         
+
                 {paymentInfo.map((item) => (
-                    <>
-                    <p>Event: {item.orderProducts[0].productName}</p>
-                  <Link href={`/shop-details/${item.orderProducts[0].productId}`}>
-                    <Image
-                      src={ item.orderProducts[0].img || ""}
-                      width={200}
-                      height={200}
-                      style={{
-                        width: "auto",
-                        height: "auto",
-                      }}
-                      alt="Product Image"
-                    />
-                  </Link>
+                  <>
+                    <p>Event: {eventDynamicId}</p>
+                    <Link href={`/shop-details/${item.orderProducts[0].productId}`}>
+                      <Image
+                        src={item.orderProducts[0].img || ""}
+                        width={200}
+                        height={200}
+                        style={{
+                          width: "auto",
+                          height: "auto",
+                        }}
+                        alt="Product Image"
+                      />
+                    </Link>
                   </>
                 ))}
 
@@ -261,7 +233,7 @@ const OrderTrackModal: React.FC = () => {
                           <span>Upload files</span>
                           <input
                             id="file-upload"
-                            name="file-upload"
+                            name="file[0]"
                             type="file"
                             className="sr-only"
                             multiple
@@ -304,8 +276,8 @@ const OrderTrackModal: React.FC = () => {
                 )}
               </div>
 
-              <div className="modal-footer">
-                <button type="submit" className="btn btn-primary">
+              <div className="modal-footer col-sm-6 text-left">
+                <button type="submit" className="btn btn-primary center">
                   Submit
                 </button>
               </div>
