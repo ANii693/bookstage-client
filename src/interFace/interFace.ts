@@ -181,6 +181,8 @@ export interface ShipMentStatus {
 }
 
 export interface PaymentInfoType {
+  productId: any;
+  img: string;
   _id:string;
   buyerEmail: string | undefined;
   name: string;
