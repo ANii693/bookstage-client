@@ -78,6 +78,8 @@ export interface AppContextType {
   update: boolean;
   setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
   myproducts: ProductType[];
+  eventSubmission: SubmissionInfoType;
+  setEventSubmission: React.Dispatch<React.SetStateAction<SubmissionInfoType>>;
   setMyProducts: React.Dispatch<React.SetStateAction<ProductType[] | []>>;
   blog: blogDataType[];
   setBlog: React.Dispatch<React.SetStateAction<blogDataType[] | []>>;

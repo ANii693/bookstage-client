@@ -11,7 +11,8 @@ import Image from "next/image";
 
 interface FormData {
   email: string;
-  eventId: string;
+  eventUId: string;
+  eventName: string;
 }
 
 interface FileWithPreview extends File {
@@ -21,33 +22,17 @@ interface FileWithPreview extends File {
 const OrderTrackModal: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     email: "",
-    eventId: "",
+    eventUId: "",
+    eventName:"",
   });
 
   const [selectedFiles, setSelectedFiles] = useState<FileWithPreview[]>([]);
   const [isDragging, setIsDragging] = useState(false);
-  const { dynamicId, eventDynamicId, user } = useGlobalContext();
+  const { dynamicId, eventDynamicId, user , eventSubmission} = useGlobalContext();
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfoType[]>([]);
   const [productInfo, setProductInfo] = useState<SubmissionInfoType | null>(null);
 
-  useEffect(() => {
-    // Check if eventDynamicId is valid (i.e., not null or undefined)
-    if (eventDynamicId) {
-      axios
-        .get(`${process.env.BASE_URL}submission/list/${eventDynamicId}`)
-        .then((res) => {
-          setProductInfo(res.data);
-          console.log(productInfo)
-        })
-        .catch((e) => {
-          toast.error("Error fetching data: " + e.message, {
-            position: "top-right",
-            autoClose: 5000,
-          });
-        });
-    }
-  }, [eventDynamicId]); // This effect will trigger every time eventDynamicId changes
-
+ 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -97,7 +82,8 @@ const OrderTrackModal: React.FC = () => {
 
     const submissionData = new FormData();
     submissionData.append("email", useremail);
-    submissionData.append("eventId", eventDynamicId);
+    submissionData.append("eventId", eventSubmission.id);
+    submissionData.append("eventName", eventSubmission.eventname);
     selectedFiles.forEach((file, index) => {
       submissionData.append(`files[${index}]`, file);
     });
@@ -120,7 +106,8 @@ const OrderTrackModal: React.FC = () => {
         // Reset form and files after submission
         setFormData({
           email: useremail,
-          eventId: eventDynamicId,
+          eventUId: eventSubmission.id,
+          eventName: eventSubmission.eventname,
         });
         setSelectedFiles([]);
       }
@@ -164,13 +151,13 @@ const OrderTrackModal: React.FC = () => {
               </div>
 
               <div className="modal-body">
-                {productInfo && (
+               
                   <>
-
-                    <p>Event: {productInfo.eventname}</p>
-                    <Link href={`/shop-details/${productInfo.eventUserId}`}>
+                    <p>Event UID: {eventSubmission.id}</p>
+                    <p>Event: {eventSubmission.eventname}</p>
+                    <Link href={`/shop-details/${eventSubmission.eventUserId}`}>
                       <Image
-                        src={productInfo.eventimg || ""}
+                        src={eventSubmission.eventimg || ""}
                         width={200}
                         height={200}
                         style={{
@@ -181,7 +168,7 @@ const OrderTrackModal: React.FC = () => {
                       />
                     </Link>
                   </>
-                )}
+  
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -234,6 +221,7 @@ const OrderTrackModal: React.FC = () => {
                     </div>
                   </div>
                 </div>
+              
 
                 {selectedFiles.length > 0 && (
                   <div className="mt-4">

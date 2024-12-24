@@ -10,7 +10,7 @@ import AddReview from "../shop-details/AddReview";
 
 
 const DashboardItems = () => {
-  const { user, header, setDynamicId, setEventDynamicId } = useGlobalContext();
+  const { user, header, setDynamicId, setEventDynamicId, setEventSubmission } = useGlobalContext();
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfoType[]>([]);
   const [submissionInfo, setSubmissionInfo] = useState<SubmissionInfoType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -101,7 +101,7 @@ const DashboardItems = () => {
                               <td className="product-subtotal">
                                 <div className="bd-banner__btn">
                                   <button
-                                    onClick={() => { setDynamicId(item.id); setEventDynamicId(item.eventUserId); }}
+                                    onClick={() => { setEventSubmission(item) }}
                                     data-toggle="tooltip"
                                     data-placement="top"
                                     title="Quick View"
