@@ -2,13 +2,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useGlobalContext from "@/hooks/use-context";
-import { PaymentInfoType } from "@/interFace/interFace";
+import { PaymentInfoType, Product, SubmissionInfoType } from "@/interFace/interFace";
 import { ChangeEvent, FormEvent, DragEvent } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import Image from "next/image";
-import { log } from "console";
 
 interface FormData {
   email: string;
@@ -27,22 +26,27 @@ const OrderTrackModal: React.FC = () => {
 
   const [selectedFiles, setSelectedFiles] = useState<FileWithPreview[]>([]);
   const [isDragging, setIsDragging] = useState(false);
-  const { dynamicId, eventDynamicId } = useGlobalContext();
+  const { dynamicId, eventDynamicId, user } = useGlobalContext();
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfoType[]>([]);
+  const [productInfo, setProductInfo] = useState<SubmissionInfoType | null>(null);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.BASE_URL}success/client-order-track/${dynamicId}`)
-      .then((res) => {
-        setPaymentInfo(res.data.products);
-      })
-      .catch((e) => {
-        // toast.error("Error fetching data: " + e.message, {
-        //   position: "top-right",
-        //   autoClose: 5000,
-        // });
-      });
-  }, [dynamicId]);
+    // Check if eventDynamicId is valid (i.e., not null or undefined)
+    if (eventDynamicId) {
+      axios
+        .get(`${process.env.BASE_URL}submission/list/${eventDynamicId}`)
+        .then((res) => {
+          setProductInfo(res.data);
+          console.log(productInfo)
+        })
+        .catch((e) => {
+          toast.error("Error fetching data: " + e.message, {
+            position: "top-right",
+            autoClose: 5000,
+          });
+        });
+    }
+  }, [eventDynamicId]); // This effect will trigger every time eventDynamicId changes
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -83,23 +87,21 @@ const OrderTrackModal: React.FC = () => {
     setIsDragging(false);
     addFiles(Array.from(e.dataTransfer.files));
   };
-  const useremail = paymentInfo.map((item) => (
-    item.EmailAddress
-  ))
+
+  const useremail = user?.email || "";
   const removeFile = (index: number) =>
     setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-
     const submissionData = new FormData();
-    submissionData.append("email", useremail[0]);
+    submissionData.append("email", useremail);
     submissionData.append("eventId", eventDynamicId);
     selectedFiles.forEach((file, index) => {
       submissionData.append(`files[${index}]`, file);
     });
-    for (let [key, value] of submissionData.entries()) {
+    for (let [key, value] of Array.from(submissionData.entries())) {
       console.log(key, value);
     }
     try {
@@ -108,23 +110,16 @@ const OrderTrackModal: React.FC = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-  
-      if (response.status === 200) {
-        console.log(submissionData);
 
-        
+      if (response.status === 200) {
         toast.success("Form submitted successfully!", {
           position: "top-right",
           autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
         });
-  
+
         // Reset form and files after submission
         setFormData({
-          email: useremail[0],
+          email: useremail,
           eventId: eventDynamicId,
         });
         setSelectedFiles([]);
@@ -133,21 +128,17 @@ const OrderTrackModal: React.FC = () => {
       toast.error("Error submitting form: " + (error as Error).message, {
         position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
       });
     }
   };
-  
-  
+
   const getFileIcon = (file: File) =>
     file.type.startsWith("video/") ? (
       <span>🎥</span>
     ) : (
       <span>📄</span>
     );
+
   return (
     <>
       <ToastContainer />
@@ -156,11 +147,11 @@ const OrderTrackModal: React.FC = () => {
         id="orderTrackModal"
         role="dialog"
         aria-hidden="true"
-         aria-labelledby="Event Submission"
+        aria-labelledby="Event Submission"
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
-            <form onSubmit={handleSubmit} encType="multipart/form-data" >
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
               {/* Payment Info */}
               <div className="modal-header">
                 <h5 className="modal-title">Event Submission Form</h5>
@@ -173,18 +164,13 @@ const OrderTrackModal: React.FC = () => {
               </div>
 
               <div className="modal-body">
-                <div className="payment-info">
-                  {paymentInfo.map((item) => (
-                    <p key={item._id}>Order ID: {item.orderId}</p>
-                  ))}
-                </div>
-
-                {paymentInfo.map((item) => (
+                {productInfo && (
                   <>
-                    <p>Event: {eventDynamicId}</p>
-                    <Link href={`/shop-details/${item.orderProducts[0].productId}`}>
+
+                    <p>Event: {productInfo.eventname}</p>
+                    <Link href={`/shop-details/${productInfo.eventUserId}`}>
                       <Image
-                        src={item.orderProducts[0].img || ""}
+                        src={productInfo.eventimg || ""}
                         width={200}
                         height={200}
                         style={{
@@ -195,8 +181,7 @@ const OrderTrackModal: React.FC = () => {
                       />
                     </Link>
                   </>
-                ))}
-
+                )}
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -264,8 +249,13 @@ const OrderTrackModal: React.FC = () => {
                               onClick={() => removeFile(index)}
                               className="text-red-500 hover:text-red-700"
                             >
-                              <svg className="w-3 h-3" height={40} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                              <svg className="w-3 h-3" height={40} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                  d="M6 6l12 12M6 18L18 6"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
                               </svg>
                             </button>
                           </div>
@@ -276,8 +266,16 @@ const OrderTrackModal: React.FC = () => {
                 )}
               </div>
 
-              <div className="modal-footer col-sm-6 text-left">
-                <button type="submit" className="btn btn-primary center">
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  Close
+                </button>
+                <button type="submit" className="btn btn-primary">
                   Submit
                 </button>
               </div>

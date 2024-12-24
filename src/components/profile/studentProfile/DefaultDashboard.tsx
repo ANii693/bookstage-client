@@ -6,7 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import moment from "moment"; 
+import moment from "moment";
 import { toast } from "react-toastify";
 const DefaultDashboard = () => {
   const { user, header, setDynamicId, settotalProduct } = useGlobalContext();
@@ -25,8 +25,8 @@ const DefaultDashboard = () => {
           settotalProduct(res.data.data.length)
         }
       })
-      .catch((e) => {});
-  }, [user?.email, header, loading,settotalProduct]);
+      .catch((e) => { });
+  }, [user?.email, header, loading, settotalProduct]);
 
   const handleCancelOrder = (item: PaymentInfoType, itm: any) => {
     // setLoading(false)
@@ -69,7 +69,7 @@ const DefaultDashboard = () => {
   };
 
   let totalCardSum = 0;
- 
+
   return (
     <>
       {paymentInfo?.length ? (
@@ -121,19 +121,6 @@ const DefaultDashboard = () => {
                                         Quantity
                                       </th>
 
-                                      {item?.shipmentStatus == "pending" ? (
-                                        <>
-                                          <th className="product-quantity">
-                                            Action
-                                          </th>
-                                        </>
-                                      ) : (
-                                        <>
-                                          <th className="product-quantity">
-                                            Track Order
-                                          </th>
-                                        </>
-                                      )}
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -181,51 +168,8 @@ const DefaultDashboard = () => {
                                                 {itm.totalCard}
                                               </span>
                                             </td>
-                                            {item?.shipmentStatus ==
-                                            "pending" ? (
-                                              <>
-                                                <td className="product-subtotal">
-                                                  <span className="amount">
-                                                    <div className="bd-banner__btn">
-                                                      <button
-                                                        onClick={() =>
-                                                          handleCancelOrder(
-                                                            item,
-                                                            itm
-                                                          )
-                                                        }
-                                                        className="bd-bn__btn-2"
-                                                      >
-                                                        Cancel Order
-                                                      </button>
-                                                    </div>
-                                                  </span>
-                                                </td>
-                                              </>
-                                            ) : (
-                                              <>
-                                                <td className="product-subtotal">
-                                                  <div className="bd-banner__btn">
-                                                    <button
-                                                      onClick={() =>
-                                                        setDynamicId(item?._id)
-                                                      }
-                                                      data-toggle="tooltip"
-                                                      data-placement="top"
-                                                      title="Quick View"
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target="#orderTrackModal"
-                                                      className="bd-bn__btn-2"
-                                                    >
-                                                      {item?.shipmentStatus ==
-                                                      "Delivered"
-                                                        ? "Delivered"
-                                                        : "View Order Status"}
-                                                    </button>
-                                                  </div>
-                                                </td>
-                                              </>
-                                            )}
+
+
                                           </tr>
                                         );
                                       }

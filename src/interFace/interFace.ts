@@ -203,3 +203,14 @@ export interface PaymentInfoType {
   shipmentStatusArray?:ShipMentStatus[] | undefined
 
 }
+
+export interface SubmissionInfoType {
+  id: string; // Custom id field
+  eventUserId: string;
+  eventname: string
+  eventimg: string
+  userEmail: string;
+  videoPath: string;
+  certificatePath: string;
+  feedbackReportPath: string;
+}
