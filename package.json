@@ -27,6 +27,7 @@
     "eslint-config-next": "13.4.6",
     "formik": "^2.4.2",
     "jwt-decode": "^3.1.2",
+    "lucide-react": "^0.469.0",
     "moment": "^2.29.4",
     "next": "13.4.6",
     "next-google-fonts": "^2.2.0",

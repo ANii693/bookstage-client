@@ -9,6 +9,8 @@ export interface IUser {
   phone: string;
   photo: string;
   gender: string;
+  evaluator?: boolean;
+  evaluatorType?: Array<String>;
 }
 
 interface HeaderType {
