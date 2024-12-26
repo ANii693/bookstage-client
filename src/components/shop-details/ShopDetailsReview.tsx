@@ -7,13 +7,23 @@ import GetRatting from "@/hooks/GetRatting";
 import Image from "next/image";
 import userIcon from "../../../public/assets/img/icon/user-icon.png";
 import Link from "next/link";
+import useGlobalContext from "@/hooks/use-context";
+
 const ShopDetailsReview = ({ product, newReview, setnewReview }: any) => {
   const [reviews, setReviews] = useState<UserReviewType[]>([]);
+  const { user } = useGlobalContext();
+  const [reviewuser, setReviewuser] = useState<string | null>(null); // Declare the state outside
+
   useEffect(() => {
     axios
       .get(`${process.env.BASE_URL}user-input/reviews?id=${product?._id}`)
       .then((res) => {
         setReviews(res.data);
+        // Check if the user has already reviewed
+        const userReview = res.data.find((item: UserReviewType) => item.email === user?.email);
+        if (userReview) {
+          setReviewuser(userReview.email);
+        }
       })
       .catch((e) => console.log(e));
   }, [product?._id, newReview]);
@@ -61,14 +71,14 @@ const ShopDetailsReview = ({ product, newReview, setnewReview }: any) => {
             id="nav-seller"
             role="tabpanel"
           >
-            <div className={`tabs-wrapper mt-35 mb-50 ${reviews.length> 4 ? "scrollbox" : ""}`}>
+            <div className={`tabs-wrapper mt-35 mb-50 ${reviews.length > 4 ? "scrollbox" : ""}`}>
               {reviews.length ? (
                 <div className="scrollbox">
-                  {reviews.map((item) => (
-                    <div key={item._id} className={`course-review-item mb-30`}>
-                      <div className="course-reviews-img">
-                        {item?.img ? (
-                          <>
+                  {reviews.map((item) => {
+                    return (
+                      <div key={item._id} className="course-review-item mb-30">
+                        <div className="course-reviews-img">
+                          {item?.img ? (
                             <Link href="#">
                               <Image
                                 src={item?.img}
@@ -78,46 +88,45 @@ const ShopDetailsReview = ({ product, newReview, setnewReview }: any) => {
                                 style={{ width: "auto", height: "auto" }}
                               />
                             </Link>
-                          </>
-                        ) : (
-                          <>
+                          ) : (
                             <Link href="#">
                               <Image
+                                src={userIcon}
+                                alt="image not found"
                                 width={200}
                                 height={200}
                                 style={{ width: "auto", height: "auto" }}
-                                src={userIcon}
-                                alt="image not found"
                               />
                             </Link>
-                          </>
-                        )}
-                      </div>
-                      <div className="course-review-list">
-                        <h5>
-                          <Link href="#"> {item.name} </Link>
-                        </h5>
-                        <div className="course-start-icon">
-                          <GetRatting averageRating={item.retting} />
-                          <span> {item.date} </span>
+                          )}
                         </div>
-                        <p> {item.review} </p>
+                        <div className="course-review-list">
+                          <h5>
+                            <Link href="#"> {item.name} </Link>
+                          </h5>
+                          <div className="course-start-icon">
+                            <GetRatting averageRating={item.retting} />
+                            <span> {item.date} </span>
+                          </div>
+                          <p> {item.review} </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
-                <>
-                  <p> No Review For This Product</p>
-                </>
+                <p>No Review For This Product</p>
               )}
+            </div>
 
+            {reviewuser !== user?.email && (
               <AddReview
                 setnewReview={setnewReview}
                 newReview={newReview}
                 product={product}
               />
-            </div>
+            )}
+
           </div>
         </div>
       </div>

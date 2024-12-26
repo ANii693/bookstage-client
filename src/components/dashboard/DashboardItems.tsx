@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import AddReview from "../shop-details/AddReview";
+import ShopDetailsMain from "../shop-details/ShopDetailsMain";
 
 
 const DashboardItems = () => {
@@ -35,7 +36,7 @@ const DashboardItems = () => {
         console.log(e);
       });
   };
-  
+
 
   useEffect(() => {
     axios
@@ -70,11 +71,11 @@ const DashboardItems = () => {
                           <tr>
                             <th className="product-thumbnail">Images</th>
                             <th className="cart-product-name">Event</th>
+                            <th className="product-quantity">Last Date To Submission</th>
                             <th className="product-quantity">Upload Video</th>
                             <th className="product-quantity">Download Certificate</th>
                             <th className="product-quantity">Feedback Report</th>
                             <th className="product-quantity">Review</th>
-                            <th className="product-quantity">Last Date To Submission</th>
                           </tr>
                         </thead>
 
@@ -97,7 +98,11 @@ const DashboardItems = () => {
                                   {item.eventname}
                                 </Link>
                               </td>
-
+                              <td className="product-subtotal">
+                                <div className="bd-banner__btn">
+                                  1/1/2025
+                                </div>
+                              </td>
                               <td className="product-subtotal">
                                 <div className="bd-banner__btn">
                                   <button
@@ -116,34 +121,26 @@ const DashboardItems = () => {
 
                               <td className="product-subtotal">
                                 <div className="bd-banner__btn">
-                                  <button className="bd-bn__btn-2"  onClick={() => { console.log(item.certificatePath)}}>Download</button>
+                                  <button className="bd-bn__btn-2" onClick={() => { console.log(item.certificatePath) }}>Download</button>
                                 </div>
                               </td>
 
                               <td className="product-subtotal">
                                 <div className="bd-banner__btn">
-                                  <button className="bd-bn__btn-2"onClick={() => { console.log(item.feedbackReportPath)}}>Download</button>
+                                  <button className="bd-bn__btn-2" onClick={() => { console.log(item.feedbackReportPath) }}>Download</button>
                                 </div>
                               </td>
 
                               <td className="product-subtotal">
                                 <div className="bd-banner__btn">
-                                  Review
-                                  <AddReview
-                                    product={item.eventUserId}
-                                    setNewReview={setNewReview}
-                                    newReview={newReview}
-                                  />
-                                    <button className="bd-bn__btn-2"  onClick={() => { CheckRating(item.eventUserId)}}>Download</button>
+                                  <Link href={`/shop-details/${item.eventUserId}#review`}>
+                                    <button className="bd-bn__btn-2">Review</button>
+                                  </Link>
                                 </div>
-                                
+
                               </td>
 
-                              <td className="product-subtotal">
-                                <div className="bd-banner__btn">
-                                  1/1/2025
-                                </div>
-                              </td>
+                             
                             </tr>
                           ))}
                         </tbody>
