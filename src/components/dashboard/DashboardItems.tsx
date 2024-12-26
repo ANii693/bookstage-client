@@ -122,7 +122,7 @@ const DashboardItems = () => {
 
                               <td className="product-subtotal">
                                 <div className="bd-banner__btn">
-                                  <button className="bd-bn__btn-2">Download</button>
+                                  <button className="bd-bn__btn-2"onClick={() => { console.log(item.feedbackReportPath)}}>Download</button>
                                 </div>
                               </td>
 
