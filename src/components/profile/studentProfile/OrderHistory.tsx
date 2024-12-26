@@ -24,7 +24,7 @@ const OrderHistory = () => {
           setPaymentInfo(res.data.data);
         }
       })
-      .catch((e) => {});
+      .catch((e) => { });
   }, [user?.email, header, loading]);
 
   const handleCancelOrder = (item: PaymentInfoType, itm: any) => {
@@ -83,19 +83,19 @@ const OrderHistory = () => {
                         <strong>Order Date</strong> :{" "}
                         <CustomDateFormatter inputDate={item?.date as string} />{" "}
                       </p>
-                      
+
                       {
                         item?.shipmentStatus === "Delivered" ?
-                        <>
-                        <p>
-                        <strong>Delivere Date</strong> :{" "}
-                        <CustomDateFormatter inputDate={item?.orderStatusDate as string} />{" "}
-                      </p>
-                        </>
-                        :
-                        <>
-                           
-                        </>
+                          <>
+                            <p>
+                              <strong>Delivere Date</strong> :{" "}
+                              <CustomDateFormatter inputDate={item?.orderStatusDate as string} />{" "}
+                            </p>
+                          </>
+                          :
+                          <>
+
+                          </>
                       }
 
                       <section className="cart-area pt-10 pb-10">
@@ -117,19 +117,6 @@ const OrderHistory = () => {
                                         Quantity
                                       </th>
 
-                                      {item?.shipmentStatus == "pending" ? (
-                                        <>
-                                          <th className="product-quantity">
-                                            Action
-                                          </th>
-                                        </>
-                                      ) : (
-                                        <>
-                                          <th className="product-quantity">
-                                            Track Order
-                                          </th>
-                                        </>
-                                      )}
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -177,51 +164,6 @@ const OrderHistory = () => {
                                                 {itm.totalCard}
                                               </span>
                                             </td>
-                                            {item?.shipmentStatus ==
-                                            "pending" ? (
-                                              <>
-                                                <td className="product-subtotal">
-                                                  <span className="amount">
-                                                    <div className="bd-banner__btn">
-                                                      <button
-                                                        onClick={() =>
-                                                          handleCancelOrder(
-                                                            item,
-                                                            itm
-                                                          )
-                                                        }
-                                                        className="bd-bn__btn-2"
-                                                      >
-                                                        Cancel Order
-                                                      </button>
-                                                    </div>
-                                                  </span>
-                                                </td>
-                                              </>
-                                            ) : (
-                                              <>
-                                                <td className="product-subtotal">
-                                                  <div className="bd-banner__btn">
-                                                    <button
-                                                      onClick={() =>
-                                                        setDynamicId(item?._id)
-                                                      }
-                                                      data-toggle="tooltip"
-                                                      data-placement="top"
-                                                      title="Quick View"
-                                                      data-bs-toggle="modal"
-                                                      data-bs-target="#orderTrackModal"
-                                                      className="bd-bn__btn-2"
-                                                    >
-                                                      {item?.shipmentStatus ==
-                                                      "Delivered"
-                                                        ? "Delivered"
-                                                        : "View Order Status"}
-                                                    </button>
-                                                  </div>
-                                                </td>
-                                              </>
-                                            )}
                                           </tr>
                                         );
                                       }
@@ -247,6 +189,7 @@ const OrderHistory = () => {
                                 </table>
                               </div>
                             </div>
+                            <hr />
                           </div>
                         </div>
                       </section>

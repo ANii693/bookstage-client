@@ -8,7 +8,6 @@ const Dashboard = () => {
     <>
       <Wrapper>
         <main>
-          Dashboard
           <DashboardItems/>
         </main>
       </Wrapper>

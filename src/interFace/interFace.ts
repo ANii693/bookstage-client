@@ -71,6 +71,8 @@ export interface AppContextType {
   setPage: React.Dispatch<React.SetStateAction<number>>;
   dynamicId:string;
   setDynamicId: React.Dispatch<React.SetStateAction<string>>;
+  eventDynamicId:string;
+  setEventDynamicId: React.Dispatch<React.SetStateAction<string>>;
   paymentSuccess: boolean;
   setPaymentSuccess: React.Dispatch<React.SetStateAction<boolean>>;
   products: ProductType[];
@@ -78,6 +80,8 @@ export interface AppContextType {
   update: boolean;
   setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
   myproducts: ProductType[];
+  eventSubmission: SubmissionInfoType;
+  setEventSubmission: React.Dispatch<React.SetStateAction<SubmissionInfoType>>;
   setMyProducts: React.Dispatch<React.SetStateAction<ProductType[] | []>>;
   blog: blogDataType[];
   setBlog: React.Dispatch<React.SetStateAction<blogDataType[] | []>>;
@@ -183,6 +187,8 @@ export interface ShipMentStatus {
 }
 
 export interface PaymentInfoType {
+  productId: any;
+  img: string;
   _id:string;
   buyerEmail: string | undefined;
   name: string;
@@ -200,4 +206,15 @@ export interface PaymentInfoType {
   orderId?: string;
   shipmentStatusArray?:ShipMentStatus[] | undefined
 
+}
+
+export interface SubmissionInfoType {
+  id: string; // Custom id field
+  eventUserId: string;
+  eventname: string
+  eventimg: string
+  userEmail: string;
+  videoPath: string;
+  certificatePath: string;
+  feedbackReportPath: string;
 }

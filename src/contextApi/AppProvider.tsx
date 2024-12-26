@@ -4,6 +4,7 @@ import {
   AppContextType,
   IUser,
   SellProductInfoType,
+  SubmissionInfoType,
 } from "@/interFace/interFace";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -47,7 +48,8 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [update, setUpdate] = useState<boolean>(false);
   const [dynamicId, setDynamicId] = useState<string>("");
   const [totalProduct, settotalProduct] = useState<number>(0);
-
+  const [eventDynamicId, setEventDynamicId] = useState<string>("");
+const [eventSubmission, setEventSubmission] = useState<SubmissionInfoType>({})
   const token =localStorage.getItem("accessToken")
   const header = {
     headers: {
@@ -170,7 +172,9 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     openWishlist,
     setOpenWishlist,
     prodcutLoadding, setProdcutLoadding,
-    update, setUpdate,dynamicId, setDynamicId,totalProduct, settotalProduct
+    update, setUpdate,dynamicId, setDynamicId,
+    totalProduct, settotalProduct, eventDynamicId, 
+    setEventDynamicId, eventSubmission,setEventSubmission, 
   };
 
   return (
