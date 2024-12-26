@@ -41,6 +41,7 @@
     "react-modal-image": "^2.6.0",
     "react-modal-video": "^2.0.0",
     "react-photo-view": "^1.2.3",
+    "react-player": "^2.16.0",
     "react-range": "^1.8.14",
     "react-redux": "^8.1.1",
     "react-slick": "^0.29.0",

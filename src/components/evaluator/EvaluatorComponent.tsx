@@ -4,17 +4,29 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Loader2, Star } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import ReactPlayer from 'react-player';
+
 
 interface Contestant {
-  buyerEmail: string;
-  name: string;
-  orderId: string;
+  _id: string; 
+  eventUserId: string; 
+  eventimg: string; 
+  eventname: string; 
+  userEmail: string; 
+  videoPath: string; 
+  certificatePath: string;
+  feedbackReportPath: string; 
+  id: string;
+}
+
+interface CriteriaRating {
+  rating: number;
+  feedback: string;
 }
 
 interface Rating {
   contestantId: string;
-  criteria: { [key: string]: number };
-  feedback: string;
+  criteria: { [key: string]: CriteriaRating };
   submitted?: boolean;
   averageRating?: number;
 }
@@ -87,11 +99,6 @@ const styles = {
     padding: '0.75rem 1rem',
     borderTop: '1px solid #e5e7eb'
   },
-  feedbackCell: {
-    padding: '0.75rem 1rem',
-    borderTop: '1px solid #e5e7eb',
-
-  },
   submitButton: {
     padding: '0.5rem 1rem',
     borderRadius: '0.375rem',
@@ -131,14 +138,20 @@ const styles = {
       backgroundColor: '#f3f4f6'
     }
   },
+  criteriaContainer: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: '0.5rem'
+  },
   textarea: {
     width: '100%',
-    minHeight: '80px',
     padding: '0.5rem',
     borderRadius: '0.375rem',
     border: '1px solid #e5e7eb',
-    resize: 'vertical',
-    fontFamily: 'inherit'
+    resize: 'none',
+    fontFamily: 'inherit',
+    fontSize: '0.875rem',
+    marginTop: '0.25rem'
   },
   disabledTextarea: {
     backgroundColor: '#f9fafb',
@@ -271,8 +284,8 @@ const EvaluatorComponent: React.FC = () => {
     "Criteria-5"
   ];
 
-  const calculateAverageRating = (criteriaRatings: { [key: string]: number }): number => {
-    const values = Object.values(criteriaRatings);
+  const calculateAverageRating = (criteriaRatings: { [key: string]: CriteriaRating }): number => {
+    const values = Object.values(criteriaRatings).map(cr => cr.rating);
     if (values.length === 0) return 0;
     const sum = values.reduce((acc, curr) => acc + curr, 0);
     return Number((sum / values.length).toFixed(2));
@@ -285,19 +298,27 @@ const EvaluatorComponent: React.FC = () => {
         contestantId,
         criteria: {
           ...(prev[contestantId]?.criteria || {}),
-          [criteriaKey]: value
-        },
-        feedback: prev[contestantId]?.feedback || ''
+          [criteriaKey]: {
+            rating: value,
+            feedback: prev[contestantId]?.criteria[criteriaKey]?.feedback || ''
+          }
+        }
       }
     }));
   };
 
-  const handleFeedbackChange = (contestantId: string, feedback: string) => {
+  const handleFeedbackChange = (contestantId: string, criteriaKey: string, feedback: string) => {
     setRatings(prev => ({
       ...prev,
       [contestantId]: {
-        ...(prev[contestantId] || { contestantId, criteria: {} }),
-        feedback
+        contestantId,
+        criteria: {
+          ...(prev[contestantId]?.criteria || {}),
+          [criteriaKey]: {
+            rating: prev[contestantId]?.criteria[criteriaKey]?.rating || 0,
+            feedback
+          }
+        }
       }
     }));
   };
@@ -308,7 +329,6 @@ const EvaluatorComponent: React.FC = () => {
       if (!rating) return;
 
       const averageRating = calculateAverageRating(rating.criteria);
-      console.log(`Average rating for contestant ${contestantId}:`, averageRating);
       
       const ratingWithAverage = {
         ...rating,
@@ -373,7 +393,7 @@ const EvaluatorComponent: React.FC = () => {
           </button>
         ))}
       </div>
-
+      <ReactPlayer url='https://www.youtube.com/watch?v=LXb3EKWsInQ' />
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
           <Loader2 style={{ height: '2rem', width: '2rem', animation: 'spin 1s linear infinite' }} />
@@ -381,62 +401,57 @@ const EvaluatorComponent: React.FC = () => {
       ) : contestants.length > 0 ? (
         <div style={{ overflowX: 'auto' }}>
           <table style={styles.table}>
-            <thead>
-              <tr>
-                {['Name', 'Email', 'Video', ...criteria, 'Feedback', 'Average Rating', 'Action'].map((header) => (
-                  <th 
-                    key={header} 
-                    style={{
-                      ...styles.tableHeader,
-                      ...(header === 'Feedback' ? {  width: '300px',
-    minWidth: '300px' } : {})
-                    }}
-                  >
-                    {header}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {contestants.map((contestant) => {
-                const isSubmitted = ratings[contestant.orderId]?.submitted;
-                const averageRating = ratings[contestant.orderId]?.averageRating || 0;
-                return (
-                  <tr key={contestant.orderId}>
-                    <td style={styles.tableCell}>{contestant.name}</td>
-                    <td style={styles.tableCell}>{contestant.buyerEmail}</td>
-                    <td style={styles.tableCell}>
-                      <button style={styles.videoButton}>
-                        View Video
-                      </button>
-                    </td>
+          <thead>
+  <tr>
+    <th style={styles.tableHeader}>Sl_No.</th>
+    <th style={styles.tableHeader}>Video</th>
+    {criteria.map(criterion => (
+      <th key={criterion} style={styles.tableHeader}>{criterion}</th>
+    ))}
+    <th style={styles.tableHeader}>Average Rating</th>
+    <th style={styles.tableHeader}>Action</th>
+  </tr>
+</thead>
+<tbody>
+  {contestants.map((contestant, index) => {
+    const isSubmitted = ratings[contestant.id]?.submitted;
+    const averageRating = ratings[contestant.id]?.averageRating || 0;
+    return (
+      <tr key={contestant.id}>
+        <td style={styles.tableCell}>{index + 1}</td>
+        <td style={styles.tableCell}>
+          <button style={styles.videoButton}>
+            View Video
+          </button>
+        </td>
                     {criteria.map((criterion) => (
                       <td key={criterion} style={styles.tableCell}>
-                        <StarRating
-                          value={ratings[contestant.orderId]?.criteria[criterion] || 0}
-                          onChange={(value) => handleRatingChange(contestant.orderId, criterion, value)}
-                          disabled={isSubmitted}
-                        />
+                        <div style={styles.criteriaContainer}>
+                          <StarRating
+                            value={ratings[contestant.id]?.criteria[criterion]?.rating || 0}
+                            onChange={(value) => handleRatingChange(contestant.id, criterion, value)}
+                            disabled={isSubmitted}
+                          />
+                          <textarea
+                            value={ratings[contestant.id]?.criteria[criterion]?.feedback || ''}
+                            onChange={(e) => handleFeedbackChange(contestant.id, criterion, e.target.value)}
+                            disabled={isSubmitted}
+                            placeholder="Reason input here..."
+                            rows={2}
+                            style={{
+                              ...styles.textarea,
+                              ...(isSubmitted ? styles.disabledTextarea : {})
+                            }}
+                          />
+                        </div>
                       </td>
                     ))}
-                    <td style={styles.feedbackCell}>
-                      <textarea
-                        value={ratings[contestant.orderId]?.feedback || ''}
-                        onChange={(e) => handleFeedbackChange(contestant.orderId, e.target.value)}
-                        disabled={isSubmitted}
-                        placeholder="Enter feedback..."
-                        style={{
-                          ...styles.textarea,
-                          ...(isSubmitted ? styles.disabledTextarea : {})
-                        }}
-                      />
-                    </td>
                     <td style={styles.tableCell}>
                       {isSubmitted ? averageRating.toFixed(2) : '-'}
                     </td>
                     <td style={styles.tableCell}>
                       <button
-                        onClick={() => handleSubmitRating(contestant.orderId)}
+                        onClick={() => handleSubmitRating(contestant.id)}
                         disabled={isSubmitted}
                         style={{
                           ...styles.submitButton,
