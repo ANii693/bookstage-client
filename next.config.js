@@ -1,7 +1,7 @@
 
 module.exports = {
     images: {
-      domains: ['i.ibb.co'],
+      domains: ['i.ibb.co', 'img.youtube.com'],
     },
    
   env: {

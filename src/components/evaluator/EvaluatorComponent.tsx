@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Loader2, Star } from 'lucide-react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import ReactPlayer from 'react-player';
+import MyVerticallyCenteredModal from './popupmodel';
 
 
 interface Contestant {
@@ -13,7 +14,9 @@ interface Contestant {
   eventimg: string; 
   eventname: string; 
   userEmail: string; 
-  videoPath: string; 
+  videoPath: string;
+  videoUrl: string;
+  videoThumbnail: string; 
   certificatePath: string;
   feedbackReportPath: string; 
   id: string;
@@ -241,6 +244,8 @@ const EvaluatorComponent: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState('');
   const [ratings, setRatings] = useState<{ [key: string]: Rating }>({});
   const [events, setEvents] = useState<string[]>([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   useEffect(() => {
     const checkEvaluatorAccess = async () => {
@@ -393,7 +398,7 @@ const EvaluatorComponent: React.FC = () => {
           </button>
         ))}
       </div>
-      <ReactPlayer url='https://www.youtube.com/watch?v=LXb3EKWsInQ' />
+      
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
           <Loader2 style={{ height: '2rem', width: '2rem', animation: 'spin 1s linear infinite' }} />
@@ -420,9 +425,32 @@ const EvaluatorComponent: React.FC = () => {
       <tr key={contestant.id}>
         <td style={styles.tableCell}>{index + 1}</td>
         <td style={styles.tableCell}>
-          <button style={styles.videoButton}>
-            View Video
-          </button>
+        <button
+      onClick={() => {setModalShow(true); setSelectedVideo(contestant.videoUrl)}}
+      style={{ border: 'none', background: 'none', padding: 0 }}
+    >
+      <Image
+        src={contestant.videoThumbnail}
+        alt="Video Thumbnail"
+        width={140} // Width in pixels
+        height={95} // Height in pixels
+        style={{
+          borderRadius: '8px', // Optional: Rounded corners
+          cursor: 'pointer', // Indicates clickable element
+        }}
+      />
+    </button>
+       
+      
+
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        url={selectedVideo}
+        
+        // url = 'https://www.youtube.com/watch?v=LXb3EKWsInQ'
+        onHide={() => setModalShow(false)}
+      />
+        
         </td>
                     {criteria.map((criterion) => (
                       <td key={criterion} style={styles.tableCell}>
@@ -437,7 +465,8 @@ const EvaluatorComponent: React.FC = () => {
                             onChange={(e) => handleFeedbackChange(contestant.id, criterion, e.target.value)}
                             disabled={isSubmitted}
                             placeholder="Reason input here..."
-                            rows={2}
+                            rows={1}
+                            outline="green"
                             style={{
                               ...styles.textarea,
                               ...(isSubmitted ? styles.disabledTextarea : {})
