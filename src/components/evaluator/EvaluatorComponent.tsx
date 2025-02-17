@@ -9,16 +9,16 @@ import MyVerticallyCenteredModal from './popupmodel';
 
 
 interface Contestant {
-  _id: string; 
-  eventUserId: string; 
-  eventimg: string; 
-  eventname: string; 
-  userEmail: string; 
+  _id: string;
+  eventUserId: string;
+  eventimg: string;
+  eventname: string;
+  userEmail: string;
   videoPath: string;
   videoUrl: string;
-  videoThumbnail: string; 
+  videoThumbnail: string;
   certificatePath: string;
-  feedbackReportPath: string; 
+  feedbackReportPath: string;
   id: string;
 }
 
@@ -162,14 +162,14 @@ const styles = {
   }
 };
 
-const StarRating = ({ 
-  value, 
-  onChange, 
-  disabled = false 
-}: { 
-  value: number; 
-  onChange: (rating: number) => void; 
-  disabled?: boolean 
+const StarRating = ({
+  value,
+  onChange,
+  disabled = false
+}: {
+  value: number;
+  onChange: (rating: number) => void;
+  disabled?: boolean
 }) => {
   const [hoverValue, setHoverValue] = useState<number | null>(null);
 
@@ -195,7 +195,7 @@ const StarRating = ({
     const displayValue = hoverValue !== null ? hoverValue : value;
     const isFullStar = displayValue >= starIndex;
     const isHalfStar = !isFullStar && displayValue >= starIndex - 0.5;
-    
+
     return (
       <button
         key={starIndex}
@@ -209,16 +209,16 @@ const StarRating = ({
           position: 'relative' as 'relative',
         }}
       >
-        <Star 
-          size={24} 
-          style={{ 
+        <Star
+          size={24}
+          style={{
             fill: isFullStar ? 'currentColor' : 'none',
             stroke: 'currentColor'
-          }} 
+          }}
         />
         {isHalfStar && (
-          <Star 
-            size={24} 
+          <Star
+            size={24}
             style={{
               position: 'absolute',
               left: 0,
@@ -252,7 +252,7 @@ const EvaluatorComponent: React.FC = () => {
     const checkEvaluatorAccess = async () => {
       try {
         const token = localStorage.getItem('accessToken');
-        
+
         if (!token) {
           router.push('/');
           return;
@@ -268,10 +268,10 @@ const EvaluatorComponent: React.FC = () => {
           return;
         }
 
-        if(response.data.data.evaluator){
+        if (response.data.data.evaluator) {
           setEvents(response.data.data.evaluatorType);
         }
-        
+
         setLoading(false);
       } catch (error) {
         console.error('Error checking evaluator access:', error);
@@ -335,14 +335,14 @@ const EvaluatorComponent: React.FC = () => {
       if (!rating) return;
 
       const averageRating = calculateAverageRating(rating.criteria);
-      
+
       const ratingWithAverage = {
         ...rating,
         averageRating
       };
-      
+
       await axios.post(`${process.env.BASE_URL}user/submit-rating`, ratingWithAverage);
-      
+
       setRatings(prev => ({
         ...prev,
         [contestantId]: {
@@ -360,7 +360,7 @@ const EvaluatorComponent: React.FC = () => {
     setLoading(true);
     setSelectedEvent(eventName);
     setRatings({});
-    
+
     try {
       const response = await axios.post<ApiResponse>(
         `${process.env.BASE_URL}user/all-contestants`,
@@ -386,7 +386,7 @@ const EvaluatorComponent: React.FC = () => {
   return (
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
-        {events.map((event) => (
+        {events?.map((event) => (
           <button
             key={event}
             onClick={() => handleEventClick(event)}
@@ -399,7 +399,8 @@ const EvaluatorComponent: React.FC = () => {
           </button>
         ))}
       </div>
-      
+
+
       {loading ? (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
           <Loader2 style={{ height: '2rem', width: '2rem', animation: 'spin 1s linear infinite' }} />
@@ -407,52 +408,52 @@ const EvaluatorComponent: React.FC = () => {
       ) : contestants.length > 0 ? (
         <div style={{ overflowX: 'auto' }}>
           <table style={styles.table}>
-          <thead>
-  <tr>
-    <th style={styles.tableHeader}>Sl_No.</th>
-    <th style={styles.tableHeader}>Video</th>
-    {criteria.map(criterion => (
-      <th key={criterion} style={styles.tableHeader}>{criterion}</th>
-    ))}
-    <th style={styles.tableHeader}>Average Rating</th>
-    <th style={styles.tableHeader}>Action</th>
-  </tr>
-</thead>
-<tbody>
-  {contestants.map((contestant, index) => {
-    const isSubmitted = ratings[contestant.id]?.submitted;
-    const averageRating = ratings[contestant.id]?.averageRating || 0;
-    return (
-      <tr key={contestant.id}>
-        <td style={styles.tableCell}>{index + 1}</td>
-        <td style={styles.tableCell}>
-        <button
-      onClick={() => {setModalShow(true); setSelectedVideo(contestant.videoUrl)}}
-      style={{ border: 'none', background: 'none', padding: 0 }}
-    >
-      <Image
-        src={contestant.videoThumbnail}
-        alt="Video Thumbnail"
-        width={140} // Width in pixels
-        height={95} // Height in pixels
-        style={{
-          borderRadius: '8px', // Optional: Rounded corners
-          cursor: 'pointer', // Indicates clickable element
-        }}
-      />
-    </button>
-       
-      
+            <thead>
+              <tr>
+                <th style={styles.tableHeader}>Sl_No.</th>
+                <th style={styles.tableHeader}>Video</th>
+                {criteria.map(criterion => (
+                  <th key={criterion} style={styles.tableHeader}>{criterion}</th>
+                ))}
+                <th style={styles.tableHeader}>Average Rating</th>
+                <th style={styles.tableHeader}>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {contestants.map((contestant, index) => {
+                const isSubmitted = ratings[contestant.id]?.submitted;
+                const averageRating = ratings[contestant.id]?.averageRating || 0;
+                return (
+                  <tr key={contestant.id}>
+                    <td style={styles.tableCell}>{index + 1}</td>
+                    <td style={styles.tableCell}>
+                      <button
+                        onClick={() => { setModalShow(true); setSelectedVideo(contestant.videoUrl) }}
+                        style={{ border: 'none', background: 'none', padding: 0 }}
+                      >
+                        <Image
+                          src={contestant.videoThumbnail}
+                          alt="Video Thumbnail"
+                          width={140} // Width in pixels
+                          height={95} // Height in pixels
+                          style={{
+                            borderRadius: '8px', // Optional: Rounded corners
+                            cursor: 'pointer', // Indicates clickable element
+                          }}
+                        />
+                      </button>
 
-      <MyVerticallyCenteredModal
-        show={modalShow}
-        url={selectedVideo}
-        
-        // url = 'https://www.youtube.com/watch?v=LXb3EKWsInQ'
-        onHide={() => setModalShow(false)}
-      />
-        
-        </td>
+
+
+                      <MyVerticallyCenteredModal
+                        show={modalShow}
+                        url={selectedVideo}
+
+                        // url = 'https://www.youtube.com/watch?v=LXb3EKWsInQ'
+                        onHide={() => setModalShow(false)}
+                      />
+
+                    </td>
                     {criteria.map((criterion) => (
                       <td key={criterion} style={styles.tableCell}>
                         <div style={styles.criteriaContainer}>
