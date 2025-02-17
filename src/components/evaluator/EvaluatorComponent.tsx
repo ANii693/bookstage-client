@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 import axios from 'axios';
 import { Loader2, Star } from 'lucide-react';
 import Image from 'next/image';
@@ -64,7 +64,7 @@ const styles = {
   buttonContainer: {
     display: 'flex',
     justifyContent: 'center',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap' as 'wrap',
     gap: '0.5rem',
     marginBottom: '2rem'
   },
@@ -84,7 +84,7 @@ const styles = {
   },
   table: {
     width: '100%',
-    borderCollapse: 'collapse',
+    borderCollapse: 'collapse' as 'collapse',
     backgroundColor: 'white',
     borderRadius: '0.5rem',
     overflow: 'hidden',
@@ -205,7 +205,8 @@ const StarRating = ({
         style={{
           ...styles.starButton,
           ...(disabled ? styles.disabledStar : {}),
-          color: (isFullStar || isHalfStar) ? '#facc15' : '#d1d5db'
+          color: (isFullStar || isHalfStar) ? '#facc15' : '#d1d5db',
+          position: 'relative' as 'relative',
         }}
       >
         <Star 
@@ -466,9 +467,10 @@ const EvaluatorComponent: React.FC = () => {
                             disabled={isSubmitted}
                             placeholder="Reason input here..."
                             rows={1}
-                            outline="green"
+                            // outline="green"
                             style={{
                               ...styles.textarea,
+                              resize: 'vertical',
                               ...(isSubmitted ? styles.disabledTextarea : {})
                             }}
                           />

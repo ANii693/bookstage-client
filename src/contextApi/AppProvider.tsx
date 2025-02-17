@@ -49,7 +49,16 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [dynamicId, setDynamicId] = useState<string>("");
   const [totalProduct, settotalProduct] = useState<number>(0);
   const [eventDynamicId, setEventDynamicId] = useState<string>("");
-const [eventSubmission, setEventSubmission] = useState<SubmissionInfoType>({})
+const [eventSubmission, setEventSubmission] = useState<SubmissionInfoType>({
+  id: '',
+  eventUserId: '', 
+  eventname: '', 
+  eventimg: '', 
+  userEmail: '', 
+  videoPath: '', 
+  certificatePath: '', 
+  feedbackReportPath: '',
+})
   const token =localStorage.getItem("accessToken")
   const header = {
     headers: {
